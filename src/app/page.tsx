@@ -53,39 +53,63 @@ const stressCategories = [
 ];
 
 export default async function HomePage() {
-  const heroImageHint = "meditacion naturaleza";
-  const heroImageUrl = await fetchPixabayImage(heroImageHint, 'all', 'hero');
+  const heroCircularImageHint = "meditacion naturaleza";
+  const heroCircularImageUrl = await fetchPixabayImage(heroCircularImageHint, 'all', 'hero-circular-img');
+
+  const heroBackgroundImageHint = "fondo abstracto sereno rosa pastel";
+  const heroBackgroundImageUrl = await fetchPixabayImage(heroBackgroundImageHint, 'horizontal', 'hero-bg-img');
   
   const calmSceneryHint = "paisaje calmado";
   const calmSceneryImageUrl = await fetchPixabayImage(calmSceneryHint, 'horizontal', 'paisaje-calmado');
 
   return (
     <PageWrapper>
-      <section className="text-center py-12 md:py-20 bg-gradient-to-b from-background to-accent/20 rounded-lg shadow-sm">
-        <div className="relative w-48 h-48 md:w-60 md:h-60 mx-auto mb-8">
-          <Image 
-            src={heroImageUrl} 
-            alt="Persona calmada meditando en la naturaleza" 
-            layout="fill"
-            objectFit="cover"
-            className="rounded-full shadow-xl"
-            data-ai-hint={heroImageHint}
-            priority
-          />
-        </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary-foreground animate-fade-in tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-secondary-foreground ">
-          Bienvenido a Serenamente
-        </h1>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
-          Tu guía personal para comprender, manejar y reducir el estrés para una vida más pacífica.
-        </p>
-        <div className="space-x-4 animate-slide-in-up" style={{ animationDelay: '0.4s' }}>
-          <Button asChild size="lg" className="shadow-lg hover:shadow-xl transition-shadow">
-            <Link href="/chatbot">Chatea con el Bot de Apoyo <ArrowRight className="ml-2 h-5 w-5" /></Link>
-          </Button>
-          <Button asChild variant="outline" size="lg" className="shadow-lg hover:shadow-xl transition-shadow">
-            <Link href="/stress-test">Realiza el Test de Estrés</Link>
-          </Button>
+      <section className="relative text-center py-12 md:py-20 rounded-lg shadow-sm overflow-hidden">
+        {/* Background Image */}
+        <Image
+          src={heroBackgroundImageUrl}
+          alt="Fondo abstracto y sereno para la bienvenida"
+          layout="fill"
+          objectFit="cover"
+          className="z-0"
+          data-ai-hint={heroBackgroundImageHint}
+          priority
+        />
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-background/10 via-background/50 to-background"></div>
+
+        {/* Content Wrapper */}
+        <div className="relative z-20">
+          <div className="relative w-48 h-48 md:w-60 md:h-60 mx-auto mb-8">
+            <Image 
+              src={heroCircularImageUrl} 
+              alt="Persona calmada meditando en la naturaleza" 
+              layout="fill"
+              objectFit="cover"
+              className="rounded-full shadow-xl"
+              data-ai-hint={heroCircularImageHint}
+              priority
+            />
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-lg animate-fade-in tracking-tight">
+            Bienvenido a Serenamente
+          </h1>
+          <p className="text-lg md:text-xl text-gray-100 drop-shadow-md max-w-2xl mx-auto mb-10 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
+            Tu guía personal para comprender, manejar y reducir el estrés para una vida más pacífica.
+          </p>
+          <div className="space-x-4 animate-slide-in-up" style={{ animationDelay: '0.4s' }}>
+            <Button asChild size="lg" className="shadow-lg hover:shadow-xl transition-shadow">
+              <Link href="/chatbot">Chatea con el Bot de Apoyo <ArrowRight className="ml-2 h-5 w-5" /></Link>
+            </Button>
+            <Button 
+              asChild 
+              variant="outline" 
+              size="lg" 
+              className="shadow-lg hover:shadow-xl transition-shadow bg-white/90 hover:bg-white text-primary hover:text-primary/90 border-primary/40 hover:border-primary/70"
+            >
+              <Link href="/stress-test">Realiza el Test de Estrés</Link>
+            </Button>
+          </div>
         </div>
       </section>
 
