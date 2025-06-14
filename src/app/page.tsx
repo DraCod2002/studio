@@ -53,10 +53,10 @@ const stressCategories = [
 ];
 
 export default async function HomePage() {
-  const heroCircularImageHint = "meditacion naturaleza rocas";
-  const heroCircularImageUrl = await fetchPixabayImage(heroCircularImageHint, 'all', 'hero-circular-img');
+  const heroCircularImageHint = "persona meditando calma";
+  const heroCircularImageUrl = await fetchPixabayImage(heroCircularImageHint, 'all', 'hero-circular-persona-meditando');
 
-  const heroBackgroundImageHint = "fondo abstracto sereno rosa pastel"; // mantuvo la pista original
+  const heroBackgroundImageHint = "fondo abstracto sereno rosa pastel";
   const heroBackgroundImageUrl = await fetchPixabayImage(heroBackgroundImageHint, 'horizontal', 'hero-bg-img');
   
   const calmSceneryHint = "paisaje calmado naturaleza serena";
@@ -76,7 +76,7 @@ export default async function HomePage() {
           priority
         />
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-background/10 via-background/50 to-background"></div>
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-black/60 to-background"></div>
 
         {/* Content Wrapper - Centered */}
         <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8">
