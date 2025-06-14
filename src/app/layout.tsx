@@ -6,7 +6,7 @@ import Footer from '@/components/layout/Footer';
 import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'Serenamente',
+  title: 'Xstrees',
   description: 'Tu guía para comprender y manejar el estrés.',
   icons: {
     icon: '/favicon.ico', 

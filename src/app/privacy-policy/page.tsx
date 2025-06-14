@@ -17,7 +17,7 @@ export default function PrivacyPolicyPage() {
         <CardContent className="prose dark:prose-invert max-w-none">
           <p><em>Última actualización: {currentDate}</em></p>
 
-          <p>Bienvenido/a a Serenamente. Nos comprometemos a proteger tu privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos tu información cuando visitas nuestro sitio web y utilizas nuestros servicios, incluido nuestro chatbot de apoyo emocional y el test de nivel de estrés.</p>
+          <p>Bienvenido/a a Xstrees. Nos comprometemos a proteger tu privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos tu información cuando visitas nuestro sitio web y utilizas nuestros servicios, incluido nuestro chatbot de apoyo emocional y el test de nivel de estrés.</p>
 
           <h2 className="font-headline text-xl font-semibold mt-6 mb-2">Información que Recopilamos</h2>
           <p>Nuestro objetivo es recopilar la menor cantidad posible de información personal para garantizar tu anonimato y privacidad.</p>
@@ -50,7 +50,7 @@ export default function PrivacyPolicyPage() {
           <p>Podemos actualizar esta Política de Privacidad de vez en cuando. Te notificaremos cualquier cambio publicando la nueva Política de Privacidad en esta página. Se te aconseja revisar esta Política de Privacidad periódicamente para cualquier cambio.</p>
 
           <h2 className="font-headline text-xl font-semibold mt-6 mb-2">Contáctanos</h2>
-          <p>Si tienes alguna pregunta sobre esta Política de Privacidad, por favor contáctanos en [Correo electrónico de marcador de posición: privacidad@serenamente.app].</p>
+          <p>Si tienes alguna pregunta sobre esta Política de Privacidad, por favor contáctanos en [Correo electrónico de marcador de posición: privacidad@xstrees.app].</p>
         </CardContent>
       </Card>
     </PageWrapper>

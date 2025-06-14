@@ -107,7 +107,7 @@ const articlesDb: Omit<ArticleData, 'imageUrl'>[] = [
     id: 'article4',
     title: 'Meditación Mindfulness: Guía para Principiantes',
     summary: 'Una introducción a las prácticas de meditación mindfulness que pueden ayudar a reducir el estrés y mejorar la regulación emocional general.',
-    author: 'Equipo Serenamente',
+    author: 'Equipo Xstrees',
     date: '18 de noviembre de 2023',
     dataAiHint: 'persona calmada meditando airelibre sol',
     category: 'Técnicas',
@@ -244,7 +244,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     }
   }
   return {
-    title: `${articleDataForMeta.title} | Serenamente`,
+    title: `${articleDataForMeta.title} | Xstrees`,
     description: articleDataForMeta.summary,
   }
 }

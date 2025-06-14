@@ -112,7 +112,7 @@ export default function ResourcesPage() {
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground">
-            La información proporcionada en Serenamente, incluyendo el chatbot y el test de estrés, es solo para fines informativos y educativos. No pretende ser un sustituto del consejo, diagnóstico o tratamiento médico profesional. Siempre busca el consejo de tu médico u otro proveedor de salud calificado con cualquier pregunta que puedas tener sobre una condición médica. Si estás en una crisis, por favor contacta a los servicios de emergencia o a una línea de crisis inmediatamente.
+            La información proporcionada en Xstrees, incluyendo el chatbot y el test de estrés, es solo para fines informativos y educativos. No pretende ser un sustituto del consejo, diagnóstico o tratamiento médico profesional. Siempre busca el consejo de tu médico u otro proveedor de salud calificado con cualquier pregunta que puedas tener sobre una condición médica. Si estás en una crisis, por favor contacta a los servicios de emergencia o a una línea de crisis inmediatamente.
           </p>
         </CardContent>
       </Card>

@@ -92,7 +92,7 @@ export default async function HomePage() {
             />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-lg animate-fade-in tracking-tight">
-            Bienvenido a Serenamente
+            Bienvenido a Xstrees
           </h1>
           <p className="text-lg md:text-xl text-gray-100 drop-shadow-md max-w-2xl mx-auto mb-10 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
             Tu guía personal para comprender, manejar y reducir el estrés para una vida más pacífica.

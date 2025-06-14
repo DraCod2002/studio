@@ -1,4 +1,3 @@
-
 // src/components/layout/Header.tsx
 "use client";
 
@@ -67,7 +66,7 @@ export default function Header() {
           <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-8">
             <Link href="/" className="flex items-center space-x-2 text-lg font-bold">
               <Sparkles className="h-6 w-6 text-primary" />
-              <span className="font-headline">Serenamente</span>
+              <span className="font-headline">Xstrees</span>
             </Link>
             <div className="h-8 w-8 rounded-full bg-muted animate-pulse" /> 
           </div>
@@ -78,9 +77,9 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center space-x-2 text-lg font-bold" aria-label="Serenamente Inicio">
+        <Link href="/" className="flex items-center space-x-2 text-lg font-bold" aria-label="Xstrees Inicio">
           <Sparkles className="h-6 w-6 text-primary" />
-          <span className="font-headline">Serenamente</span>
+          <span className="font-headline">Xstrees</span>
         </Link>
 
         <nav className="hidden md:flex items-center space-x-2 lg:space-x-4">
@@ -110,7 +109,7 @@ export default function Header() {
                 <div className="flex justify-between items-center">
                    <Link href="/" className="flex items-center space-x-2 text-lg font-bold" onClick={() => setIsMobileMenuOpen(false)}>
                     <Sparkles className="h-6 w-6 text-primary" />
-                    <span className="font-headline">Serenamente</span>
+                    <span className="font-headline">Xstrees</span>
                   </Link>
                   <SheetClose asChild>
                      <Button variant="ghost" size="icon" aria-label="Cerrar menú">
