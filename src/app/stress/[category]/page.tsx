@@ -6,73 +6,89 @@ import Link from 'next/link';
 import { ArrowLeft, Info, School, Briefcase, Users, Smartphone, CreditCard, Brain } from 'lucide-react';
 import Image from 'next/image';
 import type { Metadata } from 'next';
+import { fetchPixabayImage } from '@/services/image-service';
 
-// Helper to get category display data
-const categoryDetails: { [key: string]: { title: string; description: string; longDescription: string; icon: React.ElementType, dataAiHint: string, imageUrl: string } } = {
+type CategoryDetails = {
+  [key: string]: {
+    title: string;
+    description: string;
+    longDescription: string;
+    icon: React.ElementType;
+    dataAiHint: string; // This will be used for fetching the image
+    defaultImageUrl?: string; // Fallback placeholder if needed
+  };
+};
+
+const categoryDetailsData: CategoryDetails = {
   academic: {
     title: 'Academic Stress',
     description: 'Explore information and resources related to academic stress.',
     longDescription: 'Academic stress stems from the pressures of exams, assignments, deadlines, and the overall school environment. It can affect students at all levels. This section provides insights into managing study load, coping with exam anxiety, and maintaining a healthy balance during your academic journey.',
     icon: School,
-    dataAiHint: 'peaceful study',
-    imageUrl: 'https://placehold.co/800x400.png',
+    dataAiHint: 'peaceful study library',
   },
   professional: {
     title: 'Professional Stress',
     description: 'Explore information and resources related to professional stress.',
     longDescription: 'Work-related stress can arise from demanding deadlines, challenging projects, workplace dynamics, and career uncertainties. Learn about strategies for managing workload, improving work-life balance, dealing with difficult colleagues, and preventing burnout in your professional life.',
     icon: Briefcase,
-    dataAiHint: 'calm office',
-    imageUrl: 'https://placehold.co/800x400.png',
+    dataAiHint: 'calm modern office',
   },
   relational: {
     title: 'Relational Stress',
     description: 'Explore information and resources related to relational stress.',
     longDescription: 'Stress in personal relationships with family, friends, or partners can significantly impact well-being. This section covers topics like communication skills, conflict resolution, setting boundaries, and nurturing healthy connections to reduce interpersonal stress.',
     icon: Users,
-    dataAiHint: 'supportive friends',
-    imageUrl: 'https://placehold.co/800x400.png',
+    dataAiHint: 'supportive friends chat',
   },
   technological: {
     title: 'Technological Stress',
     description: 'Explore information and resources related to technological stress.',
     longDescription: 'The constant connectivity, social media pressures, and information overload from digital devices can be a major source of stress. Discover ways to manage your digital life, practice mindful technology use, and reduce the anxiety associated with being "always on".',
     icon: Smartphone,
-    dataAiHint: 'digital detox',
-    imageUrl: 'https://placehold.co/800x400.png',
+    dataAiHint: 'person relaxing nature phone',
   },
   financial: {
     title: 'Financial Stress',
     description: 'Explore information and resources related to financial stress.',
     longDescription: 'Worries about money, debt, budgeting, and economic stability are common stressors. This section offers guidance on financial planning, coping with financial anxiety, and finding resources to manage your finances more effectively.',
     icon: CreditCard,
-    dataAiHint: 'secure savings',
-    imageUrl: 'https://placehold.co/800x400.png',
+    dataAiHint: 'financial planning desk',
   },
   existential: {
     title: 'Existential Stress',
     description: 'Explore information and resources related to existential stress.',
     longDescription: 'Concerns about life purpose, meaning, mortality, and overall emotional well-being can lead to existential stress. Explore philosophical and mindful approaches to finding meaning, coping with uncertainty, and cultivating inner peace.',
     icon: Brain,
-    dataAiHint: 'serene thought',
-    imageUrl: 'https://placehold.co/800x400.png',
+    dataAiHint: 'serene person thinking nature',
   },
 };
 
-const getCategoryData = (slug: string) => {
-  return categoryDetails[slug] || {
+interface CategoryPageProps {
+  params: { category: string };
+}
+
+async function getCategoryPageData(slug: string) {
+  const details = categoryDetailsData[slug] || {
     slug,
     title: slug.charAt(0).toUpperCase() + slug.slice(1).replace(/-/g, ' ') + ' Stress',
     description: `Details and resources about ${slug.replace(/-/g, ' ')} stress.`,
     longDescription: 'More detailed information about this type of stress will be available soon. Check back for updates and resources.',
     icon: Info,
-    dataAiHint: 'stress help',
-    imageUrl: 'https://placehold.co/800x400.png',
+    dataAiHint: 'information help',
+    defaultImageUrl: `https://placehold.co/800x400.png?text=${encodeURIComponent(slug)}`,
   };
-};
 
-export default async function StressCategoryPage({ params }: { params: { category: string } }) {
-  const categoryData = getCategoryData(params.category);
+  const imageUrl = await fetchPixabayImage(details.dataAiHint, 'horizontal', slug);
+  
+  return {
+    ...details,
+    imageUrl: imageUrl, // This will be from Pixabay or a placeholder from the service
+  };
+}
+
+export default async function StressCategoryPage({ params }: CategoryPageProps) {
+  const categoryData = await getCategoryPageData(params.category);
   const IconComponent = categoryData.icon;
 
   return (
@@ -93,7 +109,6 @@ export default async function StressCategoryPage({ params }: { params: { categor
               alt={categoryData.title}
               layout="fill"
               objectFit="cover"
-              data-ai-hint={categoryData.dataAiHint}
               priority
             />
           </div>
@@ -110,7 +125,7 @@ export default async function StressCategoryPage({ params }: { params: { categor
             <div className="prose dark:prose-invert max-w-none text-lg leading-relaxed">
               <p>{categoryData.longDescription}</p>
               <p className="mt-6">
-                This page is currently a placeholder. More specific content, articles, and tools related to {categoryData.title.toLowerCase()} will be added soon.
+                This page provides general information. For more specific articles and tools related to {categoryData.title.toLowerCase()}, please explore our other resources.
               </p>
             </div>
           </CardContent>
@@ -139,16 +154,15 @@ export default async function StressCategoryPage({ params }: { params: { categor
 }
 
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-  const categoryData = getCategoryData(params.category);
+  const categoryData = await getCategoryPageData(params.category); // Use the same data fetching
   return {
     title: `${categoryData.title} | Serene Pathways`,
     description: categoryData.description,
   };
 }
 
-// Optional: If you want to pre-render these pages at build time
-// export async function generateStaticParams() {
-//   return Object.keys(categoryDetails).map((category) => ({
-//     category: category,
-//   }));
-// }
+export async function generateStaticParams() {
+  return Object.keys(categoryDetailsData).map((category) => ({
+    category: category,
+  }));
+}

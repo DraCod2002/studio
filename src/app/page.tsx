@@ -1,9 +1,11 @@
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import PageWrapper from '@/components/layout/PageWrapper';
 import { School, Briefcase, Users, Smartphone, CreditCard, Brain, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { fetchPixabayImage } from '@/services/image-service';
 
 const stressCategories = [
   {
@@ -11,57 +13,63 @@ const stressCategories = [
     description: 'Pressure from exams, assignments, and school life.',
     icon: School,
     link: '/stress/academic',
-    dataAiHint: 'education study',
+    dataAiHint: 'study library', // Updated hint
   },
   {
     title: 'Professional Stress',
     description: 'Work-related tension, deadlines, and career challenges.',
     icon: Briefcase,
     link: '/stress/professional',
-    dataAiHint: 'office work',
+    dataAiHint: 'calm office desk', // Updated hint
   },
   {
     title: 'Relational Stress',
     description: 'Difficulties in personal relationships with family or friends.',
     icon: Users,
     link: '/stress/relational',
-    dataAiHint: 'people connection',
+    dataAiHint: 'friends talking', // Updated hint
   },
   {
     title: 'Technological Stress',
     description: 'Overwhelm from social media, notifications, and digital life.',
     icon: Smartphone,
     link: '/stress/technological',
-    dataAiHint: 'mobile technology',
+    dataAiHint: 'person relaxing phone', // Updated hint
   },
   {
     title: 'Financial Stress',
     description: 'Worries about money, debt, and economic stability.',
     icon: CreditCard,
     link: '/stress/financial',
-    dataAiHint: 'money finance',
+    dataAiHint: 'savings piggy bank', // Updated hint
   },
   {
     title: 'Existential Stress',
     description: 'Concerns about life purpose, meaning, and emotional well-being.',
     icon: Brain,
     link: '/stress/existential',
-    dataAiHint: 'thought meditation',
+    dataAiHint: 'thoughtful person nature', // Updated hint
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const heroImageHint = "meditation nature";
+  const heroImageUrl = await fetchPixabayImage(heroImageHint, 'all', 'hero');
+  
+  const calmSceneryHint = "calm landscape";
+  const calmSceneryImageUrl = await fetchPixabayImage(calmSceneryHint, 'horizontal', 'calm-scenery');
+
   return (
     <PageWrapper>
       <section className="text-center py-12 md:py-20 bg-gradient-to-b from-background to-accent/10 rounded-lg shadow-sm">
         <div className="relative w-48 h-48 md:w-60 md:h-60 mx-auto mb-8">
           <Image 
-            src="https://placehold.co/400x400.png" 
-            alt="Calm meditating person" 
+            src={heroImageUrl} 
+            alt="Calm meditating person in nature" 
             layout="fill"
             objectFit="cover"
             className="rounded-full shadow-xl"
-            data-ai-hint="meditation nature"
+            priority
           />
         </div>
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary-foreground animate-fade-in tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-secondary-foreground ">
@@ -120,11 +128,10 @@ export default function HomePage() {
           </div>
           <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-xl">
              <Image 
-                src="https://placehold.co/600x400.png" 
+                src={calmSceneryImageUrl} 
                 alt="Peaceful scenery" 
                 layout="fill"
                 objectFit="cover"
-                data-ai-hint="calm landscape"
               />
           </div>
         </div>

@@ -3,8 +3,9 @@ import PageWrapper from '@/components/layout/PageWrapper';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { BookOpen, ExternalLink, Edit3 } from 'lucide-react';
+import { Edit3, ExternalLink } from 'lucide-react'; // Removed BookOpen as Edit3 is used for main icon
 import Image from 'next/image';
+import { fetchPixabayImage } from '@/services/image-service';
 
 interface Article {
   id: string;
@@ -12,21 +13,20 @@ interface Article {
   summary: string;
   author?: string;
   date?: string;
-  imageUrl: string;
   dataAiHint: string;
   category: string;
-  slug: string; // for linking to a full article page eventually
+  slug: string;
+  imageUrl?: string; // To be populated by fetchPixabayImage
 }
 
-const sampleArticles: Article[] = [
+const sampleArticlesData: Omit<Article, 'imageUrl'>[] = [
   {
     id: 'article1',
     title: 'Understanding Academic Stress: Tips for Students',
     summary: 'Learn common causes of academic stress and practical strategies to cope effectively during your studies.',
     author: 'Dr. Emily Carter',
     date: 'October 26, 2023',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'focused student',
+    dataAiHint: 'focused student library', // Updated hint
     category: 'Academic Stress',
     slug: 'understanding-academic-stress',
   },
@@ -36,8 +36,7 @@ const sampleArticles: Article[] = [
     summary: 'Explore techniques to manage professional stress and cultivate a healthy work-life balance in today\'s demanding environment.',
     author: 'John Miller',
     date: 'November 5, 2023',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'balanced work',
+    dataAiHint: 'balanced work life', // Updated hint
     category: 'Professional Stress',
     slug: 'work-life-balance',
   },
@@ -47,8 +46,7 @@ const sampleArticles: Article[] = [
     summary: 'Discover how technology and social media can impact stress levels and learn mindful approaches to digital consumption.',
     author: 'Aisha Khan',
     date: 'November 12, 2023',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'mindful tech',
+    dataAiHint: 'mindful social media', // Updated hint
     category: 'Technological Stress',
     slug: 'social-media-wellbeing',
   },
@@ -58,14 +56,28 @@ const sampleArticles: Article[] = [
     summary: 'An introduction to mindfulness meditation practices that can help reduce stress and improve overall emotional regulation.',
     author: 'Serene Pathways Team',
     date: 'November 18, 2023',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'inner peace',
+    dataAiHint: 'peaceful meditation outdoors', // Updated hint
     category: 'Techniques',
     slug: 'mindfulness-meditation-guide',
   },
 ];
 
-export default function ArticlesPage() {
+async function getArticlesWithImages(): Promise<Article[]> {
+  const articlesWithImages = await Promise.all(
+    sampleArticlesData.map(async (articleData) => {
+      const imageUrl = await fetchPixabayImage(articleData.dataAiHint, 'horizontal', articleData.slug);
+      return {
+        ...articleData,
+        imageUrl,
+      };
+    })
+  );
+  return articlesWithImages;
+}
+
+export default async function ArticlesPage() {
+  const articles = await getArticlesWithImages();
+
   return (
     <PageWrapper>
       <div className="text-center mb-12">
@@ -77,19 +89,20 @@ export default function ArticlesPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {sampleArticles.map((article, index) => (
+        {articles.map((article, index) => (
           <Card key={article.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col animate-slide-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
             <CardHeader className="p-0">
-              <div className="relative w-full h-48">
-                <Image
-                  src={article.imageUrl}
-                  alt={article.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-t-lg"
-                  data-ai-hint={article.dataAiHint}
-                />
-              </div>
+              {article.imageUrl && (
+                <div className="relative w-full h-48">
+                  <Image
+                    src={article.imageUrl}
+                    alt={article.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-t-lg"
+                  />
+                </div>
+              )}
               <div className="p-6">
                 <span className="text-xs font-semibold uppercase text-primary tracking-wider">{article.category}</span>
                 <CardTitle className="text-xl mt-1 mb-2">{article.title}</CardTitle>
@@ -104,7 +117,6 @@ export default function ArticlesPage() {
               <CardDescription className="text-base leading-relaxed">{article.summary}</CardDescription>
             </CardContent>
             <CardFooter className="px-6 pb-6">
-              {/* This button can link to a full article page in the future */}
               <Button asChild variant="outline" className="w-full">
                 <Link href={`/articles/${article.slug}`}>
                   Read More <ExternalLink className="ml-2 h-4 w-4" />
