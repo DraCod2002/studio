@@ -22,18 +22,25 @@ const allQuestions: StressQuestion[] = [
   { id: 'q4', text: 'He notado cambios en mi apetito (más hambre o falta de apetito).', category: 'physical' },
   { id: 'q5', text: 'Me siento más cansado/a de lo normal, incluso sin hacer mucho esfuerzo.', category: 'physical' },
   { id: 'q6', text: 'Mi ritmo cardíaco se acelera sin razón aparente.', category: 'physical' },
+  { id: 'q17', text: 'He experimentado problemas digestivos (malestar estomacal, estreñimiento, diarrea).', category: 'physical' },
+  { id: 'q18', text: 'He notado una disminución en mi deseo sexual.', category: 'physical' },
   // Síntomas emocionales
   { id: 'q7', text: 'Me siento irritable, impaciente o de mal humor fácilmente.', category: 'emotional' },
   { id: 'q8', text: 'Me cuesta relajarme, incluso cuando tengo tiempo libre.', category: 'emotional' },
   { id: 'q9', text: 'Me siento ansioso/a o nervioso/a con frecuencia.', category: 'emotional' },
   { id: 'q10', text: 'Me siento abrumado/a por tareas simples o cotidianas.', category: 'emotional' },
   { id: 'q11', text: 'He perdido interés en actividades que antes disfrutaba.', category: 'emotional' },
+  { id: 'q19', text: 'Me siento desesperanzado/a sobre el futuro.', category: 'emotional' },
+  { id: 'q20', text: 'Siento ganas de llorar sin razón aparente o con más frecuencia.', category: 'emotional' },
   // Síntomas conductuales o cognitivos
   { id: 'q12', text: 'Me cuesta concentrarme o tomar decisiones.', category: 'cognitive' },
   { id: 'q13', text: 'Estoy procrastinando más de lo normal.', category: 'cognitive' },
   { id: 'q14', text: 'Estoy comiendo en exceso o muy poco.', category: 'cognitive' },
   { id: 'q15', text: 'He aumentado el consumo de cafeína, alcohol o cigarrillos.', category: 'cognitive' },
   { id: 'q16', text: 'Estoy evitando situaciones sociales o personas.', category: 'cognitive' },
+  { id: 'q21', text: 'He tenido dificultad para recordar cosas o me siento olvidadizo/a.', category: 'cognitive' },
+  { id: 'q22', text: 'Me he vuelto más descuidado/a con mis responsabilidades personales o laborales.', category: 'cognitive' },
+  { id: 'q23', text: 'Tengo pensamientos recurrentes o preocupantes que no puedo quitarme de la cabeza.', category: 'cognitive' },
 ];
 
 const questionCategories: { title: string, key: StressQuestion['category'], icon: React.ElementType }[] = [
@@ -63,16 +70,10 @@ export default function StressTestForm() {
     e.preventDefault();
     
     let count = 0;
-    for (const questionId in answers) {
-      if (answers[questionId] === true) {
+    allQuestions.forEach(q => {
+      if (answers[q.id] === true) {
         count++;
       }
-    }
-    // Ensure all questions are considered, even if not explicitly set in answers (default to false)
-    allQuestions.forEach(q => {
-        if (answers[q.id] === undefined) {
-            // If a question wasn't touched, it's effectively a "No"
-        }
     });
 
     setAffirmativeCount(count);
@@ -81,21 +82,21 @@ export default function StressTestForm() {
 
   const getStressLevelInfo = (count: number | null) => {
     if (count === null) return { level: '', advice: '', icon: Activity, color: '' };
-    if (count <= 4) {
+    if (count <= 7) { // Adjusted threshold for 23 questions
       return { 
         level: 'Nivel bajo de estrés o manejable.', 
         advice: '¡Excelente! Parece que estás manejando bien el estrés. Continúa con tus hábitos saludables y estrategias de afrontamiento.', 
         icon: Smile, 
         color: 'text-green-500' 
       };
-    } else if (count <= 8) {
+    } else if (count <= 15) { // Adjusted threshold for 23 questions
       return { 
         level: 'Estrés moderado.', 
         advice: 'Podrías estar experimentando un nivel moderado de estrés. Sería útil implementar o reforzar técnicas de manejo del estrés como ejercicios de respiración, actividad física regular, asegurar un buen descanso y hablar con alguien de confianza sobre cómo te sientes.', 
         icon: Meh, 
         color: 'text-yellow-500' 
       };
-    } else {
+    } else { // count >= 16
       return { 
         level: 'Posible estrés elevado.', 
         advice: 'Tus respuestas sugieren un posible nivel elevado de estrés. Es muy recomendable que busques apoyo profesional (psicólogo, terapeuta, médico general) para evaluar tu situación y recibir orientación adecuada. Recuerda que pedir ayuda es un paso valiente.', 
@@ -161,3 +162,4 @@ export default function StressTestForm() {
     </form>
   );
 }
+
