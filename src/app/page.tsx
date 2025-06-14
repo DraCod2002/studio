@@ -13,7 +13,7 @@ const stressCategories = [
     description: 'Presión por exámenes, tareas y vida escolar.',
     icon: School,
     link: '/stress/academic',
-    dataAiHint: 'estudio biblioteca tranquilo',
+    dataAiHint: 'estudiante biblioteca tranquilo',
   },
   {
     title: 'Estrés Profesional',
@@ -27,44 +27,44 @@ const stressCategories = [
     description: 'Dificultades en relaciones personales con familia o amigos.',
     icon: Users,
     link: '/stress/relational',
-    dataAiHint: 'amigos hablando',
+    dataAiHint: 'amigos hablando calmadamente',
   },
   {
     title: 'Estrés Tecnológico',
     description: 'Sobrecarga por redes sociales, notificaciones y vida digital.',
     icon: Smartphone,
     link: '/stress/technological',
-    dataAiHint: 'persona relajandose telefono',
+    dataAiHint: 'persona desconectando tecnologia naturaleza',
   },
   {
     title: 'Estrés Financiero',
     description: 'Preocupaciones por dinero, deudas y estabilidad económica.',
     icon: CreditCard,
     link: '/stress/financial',
-    dataAiHint: 'ahorros alcancia',
+    dataAiHint: 'monedas ahorros planificacion',
   },
   {
     title: 'Estrés Existencial',
     description: 'Inquietudes sobre el propósito de vida, significado y bienestar emocional.',
     icon: Brain,
     link: '/stress/existential',
-    dataAiHint: 'persona pensativa naturaleza',
+    dataAiHint: 'persona contemplando atardecer',
   },
 ];
 
 export default async function HomePage() {
-  const heroCircularImageHint = "meditacion naturaleza";
+  const heroCircularImageHint = "meditacion naturaleza rocas";
   const heroCircularImageUrl = await fetchPixabayImage(heroCircularImageHint, 'all', 'hero-circular-img');
 
-  const heroBackgroundImageHint = "fondo abstracto sereno rosa pastel";
+  const heroBackgroundImageHint = "fondo abstracto sereno rosa pastel"; // mantuvo la pista original
   const heroBackgroundImageUrl = await fetchPixabayImage(heroBackgroundImageHint, 'horizontal', 'hero-bg-img');
   
-  const calmSceneryHint = "paisaje calmado";
+  const calmSceneryHint = "paisaje calmado naturaleza serena";
   const calmSceneryImageUrl = await fetchPixabayImage(calmSceneryHint, 'horizontal', 'paisaje-calmado');
 
   return (
-    <PageWrapper>
-      <section className="relative text-center py-12 md:py-20 rounded-lg shadow-sm overflow-hidden">
+    <>
+      <section className="relative text-center py-12 md:py-20 overflow-hidden">
         {/* Background Image */}
         <Image
           src={heroBackgroundImageUrl}
@@ -78,8 +78,8 @@ export default async function HomePage() {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-background/10 via-background/50 to-background"></div>
 
-        {/* Content Wrapper */}
-        <div className="relative z-20">
+        {/* Content Wrapper - Centered */}
+        <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative w-48 h-48 md:w-60 md:h-60 mx-auto mb-8">
             <Image 
               src={heroCircularImageUrl} 
@@ -113,55 +113,57 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
-        <h2 className="text-3xl font-bold text-center mb-12">Explora el Manejo del Estrés</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {stressCategories.map((category, index) => (
-            <Link key={category.title} href={category.link} passHref className="flex">
-              <Card 
-                className="w-full shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-1 animate-slide-in-up flex flex-col"
-                style={{ animationDelay: `${0.5 + index * 0.1}s` }}
-              >
-                <CardHeader className="flex flex-row items-center space-x-4 pb-2">
-                  <category.icon className="w-10 h-10 text-primary" />
-                  <CardTitle className="text-xl">{category.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <CardDescription className="text-base mb-4">{category.description}</CardDescription>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <PageWrapper>
+        <section className="py-16 md:py-24">
+          <h2 className="text-3xl font-bold text-center mb-12">Explora el Manejo del Estrés</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {stressCategories.map((category, index) => (
+              <Link key={category.title} href={category.link} passHref className="flex">
+                <Card 
+                  className="w-full shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-1 animate-slide-in-up flex flex-col"
+                  style={{ animationDelay: `${0.5 + index * 0.1}s` }}
+                >
+                  <CardHeader className="flex flex-row items-center space-x-4 pb-2">
+                    <category.icon className="w-10 h-10 text-primary" />
+                    <CardTitle className="text-xl">{category.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-grow">
+                    <CardDescription className="text-base mb-4">{category.description}</CardDescription>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </section>
 
-      <section className="py-16 md:py-24 bg-muted/50 rounded-lg shadow-sm">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h2 className="text-3xl font-bold mb-6">¿Listo para Encontrar tu Calma?</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Nuestras herramientas y recursos están diseñados para ayudarte a navegar los desafíos de la vida con mayor facilidad y resiliencia. Descubre estrategias y apoyo personalizados.
-            </p>
-            <div className="space-y-6 md:space-y-0 md:space-x-4">
-              <Button asChild size="lg" className="w-full md:w-auto shadow-md hover:shadow-lg transition-shadow">
-                <Link href="/articles">Leer Artículos</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="w-full md:w-auto shadow-md hover:shadow-lg transition-shadow">
-                <Link href="/resources">Encontrar Profesionales</Link>
-              </Button>
+        <section className="py-16 md:py-24 bg-muted/50 rounded-lg shadow-sm">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-3xl font-bold mb-6">¿Listo para Encontrar tu Calma?</h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                Nuestras herramientas y recursos están diseñados para ayudarte a navegar los desafíos de la vida con mayor facilidad y resiliencia. Descubre estrategias y apoyo personalizados.
+              </p>
+              <div className="space-y-6 md:space-y-0 md:space-x-4">
+                <Button asChild size="lg" className="w-full md:w-auto shadow-md hover:shadow-lg transition-shadow">
+                  <Link href="/articles">Leer Artículos</Link>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="w-full md:w-auto shadow-md hover:shadow-lg transition-shadow">
+                  <Link href="/resources">Encontrar Profesionales</Link>
+                </Button>
+              </div>
+            </div>
+            <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-xl">
+               <Image 
+                  src={calmSceneryImageUrl} 
+                  alt="Paisaje tranquilo" 
+                  layout="fill"
+                  objectFit="cover"
+                  data-ai-hint={calmSceneryHint}
+                />
             </div>
           </div>
-          <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-xl">
-             <Image 
-                src={calmSceneryImageUrl} 
-                alt="Paisaje tranquilo" 
-                layout="fill"
-                objectFit="cover"
-                data-ai-hint={calmSceneryHint}
-              />
-          </div>
-        </div>
-      </section>
-    </PageWrapper>
+        </section>
+      </PageWrapper>
+    </>
   );
 }
