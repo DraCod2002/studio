@@ -13,7 +13,7 @@ const stressCategories = [
     description: 'Presión por exámenes, tareas y vida escolar.',
     icon: School,
     link: '/stress/academic',
-    dataAiHint: 'estudio biblioteca',
+    dataAiHint: 'estudio biblioteca tranquilo',
   },
   {
     title: 'Estrés Profesional',
@@ -61,7 +61,7 @@ export default async function HomePage() {
 
   return (
     <PageWrapper>
-      <section className="text-center py-12 md:py-20 bg-gradient-to-b from-background to-accent/10 rounded-lg shadow-sm">
+      <section className="text-center py-12 md:py-20 bg-gradient-to-b from-background to-accent/20 rounded-lg shadow-sm">
         <div className="relative w-48 h-48 md:w-60 md:h-60 mx-auto mb-8">
           <Image 
             src={heroImageUrl} 
