@@ -10,42 +10,42 @@ const stressCategories = [
     title: 'Academic Stress',
     description: 'Pressure from exams, assignments, and school life.',
     icon: School,
-    link: '#academic-stress', // Placeholder, can link to specific sections or articles
+    link: '/stress/academic',
     dataAiHint: 'education study',
   },
   {
     title: 'Professional Stress',
     description: 'Work-related tension, deadlines, and career challenges.',
     icon: Briefcase,
-    link: '#professional-stress',
+    link: '/stress/professional',
     dataAiHint: 'office work',
   },
   {
     title: 'Relational Stress',
     description: 'Difficulties in personal relationships with family or friends.',
     icon: Users,
-    link: '#relational-stress',
+    link: '/stress/relational',
     dataAiHint: 'people connection',
   },
   {
     title: 'Technological Stress',
     description: 'Overwhelm from social media, notifications, and digital life.',
     icon: Smartphone,
-    link: '#technological-stress',
+    link: '/stress/technological',
     dataAiHint: 'mobile technology',
   },
   {
     title: 'Financial Stress',
     description: 'Worries about money, debt, and economic stability.',
     icon: CreditCard,
-    link: '#financial-stress',
+    link: '/stress/financial',
     dataAiHint: 'money finance',
   },
   {
     title: 'Existential Stress',
     description: 'Concerns about life purpose, meaning, and emotional well-being.',
     icon: Brain,
-    link: '#existential-stress',
+    link: '/stress/existential',
     dataAiHint: 'thought meditation',
   },
 ];
@@ -84,23 +84,20 @@ export default function HomePage() {
         <h2 className="text-3xl font-bold text-center mb-12">Explore Stress Management</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {stressCategories.map((category, index) => (
-            <Card 
-              key={category.title} 
-              className="shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-1 animate-slide-in-up"
-              style={{ animationDelay: `${0.5 + index * 0.1}s` }}
-            >
-              <CardHeader className="flex flex-row items-center space-x-4 pb-2">
-                <category.icon className="w-10 h-10 text-primary" />
-                <CardTitle className="text-xl">{category.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base mb-4">{category.description}</CardDescription>
-                {/* Link can be developed further */}
-                {/* <Button variant="link" asChild className="p-0 h-auto text-primary">
-                  <Link href={category.link}>Learn More <ArrowRight className="ml-1 h-4 w-4" /></Link>
-                </Button> */}
-              </CardContent>
-            </Card>
+            <Link key={category.title} href={category.link} passHref className="flex">
+              <Card 
+                className="w-full shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-1 animate-slide-in-up flex flex-col"
+                style={{ animationDelay: `${0.5 + index * 0.1}s` }}
+              >
+                <CardHeader className="flex flex-row items-center space-x-4 pb-2">
+                  <category.icon className="w-10 h-10 text-primary" />
+                  <CardTitle className="text-xl">{category.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <CardDescription className="text-base mb-4">{category.description}</CardDescription>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </section>
