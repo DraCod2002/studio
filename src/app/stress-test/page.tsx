@@ -1,7 +1,8 @@
+
 import PageWrapper from '@/components/layout/PageWrapper';
 import StressTestForm from '@/components/stress-test/StressTestForm';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ClipboardList } from 'lucide-react';
+import { ClipboardCheck } from 'lucide-react'; // Changed icon
 
 export default function StressTestPage() {
   return (
@@ -9,12 +10,13 @@ export default function StressTestPage() {
       <Card className="w-full max-w-2xl shadow-xl">
          <CardHeader className="text-center">
           <div className="flex justify-center items-center mb-4">
-            <ClipboardList className="w-12 h-12 text-primary" />
+            <ClipboardCheck className="w-12 h-12 text-primary" />
           </div>
-          <CardTitle className="text-3xl font-bold">Evaluación de Nivel de Estrés</CardTitle>
-          <CardDescription className="text-lg text-muted-foreground">
-            Responde algunas preguntas para obtener una comprensión básica de tu nivel de estrés actual.
-            Esto no es una herramienta de diagnóstico.
+          <CardTitle className="text-3xl font-bold">Formulario para Identificar si Tienes Estrés</CardTitle>
+          <CardDescription className="text-lg text-muted-foreground px-2">
+            Instrucciones: Marca con una “✅” si la afirmación aplica a ti durante las últimas dos semanas.
+            <br />
+            <span className="text-sm mt-1 block">Esta es una herramienta de autoevaluación, no un diagnóstico.</span>
           </CardDescription>
         </CardHeader>
         <CardContent>

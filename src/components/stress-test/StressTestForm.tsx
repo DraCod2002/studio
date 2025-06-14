@@ -1,138 +1,130 @@
+
 'use client';
 
 import { useState, FormEvent } from 'react';
 import { Button } from '@/components/ui/button';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, AlertTriangle, Activity } from 'lucide-react';
+import { CheckCircle, AlertTriangle, Activity, Smile, Meh, Frown } from 'lucide-react';
 
-interface Question {
+interface StressQuestion {
   id: string;
   text: string;
-  options: { label: string; value: number }[];
+  category: 'physical' | 'emotional' | 'cognitive';
 }
 
-const questions: Question[] = [
-  {
-    id: 'q1',
-    text: '¿Con qué frecuencia te has sentido abrumado/a en la última semana?',
-    options: [
-      { label: 'Nunca', value: 0 },
-      { label: 'Raramente', value: 1 },
-      { label: 'A veces', value: 2 },
-      { label: 'A menudo', value: 3 },
-      { label: 'Muy a menudo', value: 4 },
-    ],
-  },
-  {
-    id: 'q2',
-    text: '¿Con qué frecuencia has tenido problemas para relajarte en la última semana?',
-    options: [
-      { label: 'Nunca', value: 0 },
-      { label: 'Raramente', value: 1 },
-      { label: 'A veces', value: 2 },
-      { label: 'A menudo', value: 3 },
-      { label: 'Muy a menudo', value: 4 },
-    ],
-  },
-  {
-    id: 'q3',
-    text: '¿Con qué frecuencia te has sentido irritable o te has enfadado fácilmente en la última semana?',
-    options: [
-      { label: 'Nunca', value: 0 },
-      { label: 'Raramente', value: 1 },
-      { label: 'A veces', value: 2 },
-      { label: 'A menudo', value: 3 },
-      { label: 'Muy a menudo', value: 4 },
-    ],
-  },
-    {
-    id: 'q4',
-    text: '¿Con qué frecuencia te ha costado concentrarte en la última semana?',
-    options: [
-      { label: 'Nunca', value: 0 },
-      { label: 'Raramente', value: 1 },
-      { label: 'A veces', value: 2 },
-      { label: 'A menudo', value: 3 },
-      { label: 'Muy a menudo', value: 4 },
-    ],
-  },
-  {
-    id: 'q5',
-    text: '¿Con qué frecuencia te has sentido preocupado/a o ansioso/a en la última semana?',
-    options: [
-      { label: 'Nunca', value: 0 },
-      { label: 'Raramente', value: 1 },
-      { label: 'A veces', value: 2 },
-      { label: 'A menudo', value: 3 },
-      { label: 'Muy a menudo', value: 4 },
-    ],
-  },
+const allQuestions: StressQuestion[] = [
+  // Síntomas físicos
+  { id: 'q1', text: 'He tenido dolores de cabeza frecuentes.', category: 'physical' },
+  { id: 'q2', text: 'Siento tensión muscular (cuello, espalda, mandíbula).', category: 'physical' },
+  { id: 'q3', text: 'Tengo dificultades para dormir o me despierto con frecuencia.', category: 'physical' },
+  { id: 'q4', text: 'He notado cambios en mi apetito (más hambre o falta de apetito).', category: 'physical' },
+  { id: 'q5', text: 'Me siento más cansado/a de lo normal, incluso sin hacer mucho esfuerzo.', category: 'physical' },
+  { id: 'q6', text: 'Mi ritmo cardíaco se acelera sin razón aparente.', category: 'physical' },
+  // Síntomas emocionales
+  { id: 'q7', text: 'Me siento irritable, impaciente o de mal humor fácilmente.', category: 'emotional' },
+  { id: 'q8', text: 'Me cuesta relajarme, incluso cuando tengo tiempo libre.', category: 'emotional' },
+  { id: 'q9', text: 'Me siento ansioso/a o nervioso/a con frecuencia.', category: 'emotional' },
+  { id: 'q10', text: 'Me siento abrumado/a por tareas simples o cotidianas.', category: 'emotional' },
+  { id: 'q11', text: 'He perdido interés en actividades que antes disfrutaba.', category: 'emotional' },
+  // Síntomas conductuales o cognitivos
+  { id: 'q12', text: 'Me cuesta concentrarme o tomar decisiones.', category: 'cognitive' },
+  { id: 'q13', text: 'Estoy procrastinando más de lo normal.', category: 'cognitive' },
+  { id: 'q14', text: 'Estoy comiendo en exceso o muy poco.', category: 'cognitive' },
+  { id: 'q15', text: 'He aumentado el consumo de cafeína, alcohol o cigarrillos.', category: 'cognitive' },
+  { id: 'q16', text: 'Estoy evitando situaciones sociales o personas.', category: 'cognitive' },
 ];
 
+const questionCategories: { title: string, key: StressQuestion['category'], icon: React.ElementType }[] = [
+    { title: 'Síntomas Físicos', key: 'physical', icon: Activity },
+    { title: 'Síntomas Emocionales', key: 'emotional', icon: Meh },
+    { title: 'Síntomas Conductuales o Cognitivos', key: 'cognitive', icon: Frown }
+];
+
+
 interface Answers {
-  [key: string]: string; 
+  [key: string]: boolean;
 }
 
 export default function StressTestForm() {
   const [answers, setAnswers] = useState<Answers>({});
-  const [score, setScore] = useState<number | null>(null);
+  const [affirmativeCount, setAffirmativeCount] = useState<number | null>(null);
   const [showResults, setShowResults] = useState(false);
 
-  const handleInputChange = (questionId: string, value: string) => {
+  const handleCheckboxChange = (questionId: string, checked: boolean) => {
     setAnswers((prevAnswers) => ({
       ...prevAnswers,
-      [questionId]: value,
+      [questionId]: checked,
     }));
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (Object.keys(answers).length !== questions.length) {
-      alert('Por favor, responde todas las preguntas.'); 
-      return;
-    }
     
-    let currentScore = 0;
+    let count = 0;
     for (const questionId in answers) {
-      currentScore += parseInt(answers[questionId], 10);
+      if (answers[questionId] === true) {
+        count++;
+      }
     }
-    setScore(currentScore);
+    // Ensure all questions are considered, even if not explicitly set in answers (default to false)
+    allQuestions.forEach(q => {
+        if (answers[q.id] === undefined) {
+            // If a question wasn't touched, it's effectively a "No"
+        }
+    });
+
+    setAffirmativeCount(count);
     setShowResults(true);
   };
 
-  const getStressLevel = (currentScore: number | null) => {
-    if (currentScore === null) return { level: '', advice: '', icon: Activity, color: '' };
-    if (currentScore <= 6) {
-      return { level: 'Estrés Bajo', advice: 'Pareces estar manejando bien el estrés. ¡Sigue así con hábitos saludables!', icon: CheckCircle, color: 'text-green-500' };
-    } else if (currentScore <= 12) {
-      return { level: 'Estrés Moderado', advice: 'Podrías estar experimentando algo de estrés. Considera explorar técnicas de relajación y prácticas de autocuidado.', icon: Activity, color: 'text-yellow-500' };
+  const getStressLevelInfo = (count: number | null) => {
+    if (count === null) return { level: '', advice: '', icon: Activity, color: '' };
+    if (count <= 4) {
+      return { 
+        level: 'Nivel bajo de estrés o manejable.', 
+        advice: '¡Excelente! Parece que estás manejando bien el estrés. Continúa con tus hábitos saludables y estrategias de afrontamiento.', 
+        icon: Smile, 
+        color: 'text-green-500' 
+      };
+    } else if (count <= 8) {
+      return { 
+        level: 'Estrés moderado.', 
+        advice: 'Podrías estar experimentando un nivel moderado de estrés. Sería útil implementar o reforzar técnicas de manejo del estrés como ejercicios de respiración, actividad física regular, asegurar un buen descanso y hablar con alguien de confianza sobre cómo te sientes.', 
+        icon: Meh, 
+        color: 'text-yellow-500' 
+      };
     } else {
-      return { level: 'Estrés Alto', advice: 'Tus niveles de estrés parecen ser altos. Podría ser beneficioso buscar apoyo, practicar técnicas de reducción de estrés consistentemente y considerar hablar con un profesional si es necesario.', icon: AlertTriangle, color: 'text-red-500' };
+      return { 
+        level: 'Posible estrés elevado.', 
+        advice: 'Tus respuestas sugieren un posible nivel elevado de estrés. Es muy recomendable que busques apoyo profesional (psicólogo, terapeuta, médico general) para evaluar tu situación y recibir orientación adecuada. Recuerda que pedir ayuda es un paso valiente.', 
+        icon: Frown, 
+        color: 'text-red-500' 
+      };
     }
   };
 
   const resetTest = () => {
     setAnswers({});
-    setScore(null);
+    setAffirmativeCount(null);
     setShowResults(false);
   };
 
-  if (showResults && score !== null) {
-    const { level, advice, icon: Icon, color } = getStressLevel(score);
+  if (showResults && affirmativeCount !== null) {
+    const { level, advice, icon: Icon, color } = getStressLevelInfo(affirmativeCount);
     return (
       <Card className="text-center p-6 animate-fade-in">
         <CardHeader>
           <div className="flex justify-center items-center mb-4">
             <Icon className={`w-16 h-16 ${color}`} />
           </div>
-          <CardTitle className="text-2xl font-bold">Resultado de tu Evaluación de Estrés</CardTitle>
+          <CardTitle className="text-2xl font-bold">Resultados de tu Autoevaluación</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-xl font-semibold mb-2">Puntuación: {score} / {questions.length * 4}</p>
-          <p className={`text-2xl font-bold mb-4 ${color}`}>{level}</p>
-          <p className="text-muted-foreground mb-6 text-base">{advice}</p>
+          <p className="text-xl font-semibold mb-2">Respuestas afirmativas: {affirmativeCount} / {allQuestions.length}</p>
+          <p className={`text-xl font-bold mb-4 ${color}`}>{level}</p>
+          <p className="text-muted-foreground mb-6 text-base whitespace-pre-line">{advice}</p>
           <Button onClick={resetTest} className="w-full sm:w-auto">Realizar Test de Nuevo</Button>
         </CardContent>
       </Card>
@@ -141,28 +133,30 @@ export default function StressTestForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
-      {questions.map((question, index) => (
-        <fieldset key={question.id} className="space-y-3 p-4 border rounded-lg shadow-sm bg-card animate-slide-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-          <legend className="text-lg font-medium mb-2 text-primary-foreground bg-primary px-3 py-1 rounded-md">{`Pregunta ${index + 1}: ${question.text}`}</legend>
-          <RadioGroup
-            onValueChange={(value) => handleInputChange(question.id, value)}
-            value={answers[question.id]}
-            aria-label={question.text}
-            className="space-y-2"
-          >
-            {question.options.map((option) => (
-              <div key={option.value} className="flex items-center space-x-3 p-2 rounded-md hover:bg-muted transition-colors">
-                <RadioGroupItem value={option.value.toString()} id={`${question.id}-${option.value}`} />
-                <Label htmlFor={`${question.id}-${option.value}`} className="text-base cursor-pointer flex-grow">
-                  {option.label}
-                </Label>
-              </div>
-            ))}
-          </RadioGroup>
+      {questionCategories.map(category => (
+        <fieldset key={category.key} className="space-y-3 p-4 border rounded-lg shadow-sm bg-card animate-slide-in-up">
+          <legend className="text-xl font-semibold mb-3 text-primary flex items-center">
+            <category.icon className="mr-2 h-6 w-6" />
+            {category.title}
+          </legend>
+          {allQuestions.filter(q => q.category === category.key).map((question, index) => (
+            <div key={question.id} className="flex items-start space-x-3 p-3 rounded-md hover:bg-muted transition-colors">
+              <Checkbox
+                id={question.id}
+                checked={answers[question.id] || false}
+                onCheckedChange={(checked) => handleCheckboxChange(question.id, Boolean(checked))}
+                className="mt-1"
+                aria-labelledby={`${question.id}-label`}
+              />
+              <Label htmlFor={question.id} id={`${question.id}-label`} className="text-base cursor-pointer flex-grow leading-snug">
+                {question.text}
+              </Label>
+            </div>
+          ))}
         </fieldset>
       ))}
       <Button type="submit" className="w-full text-lg py-3 mt-6 shadow-md hover:shadow-lg transition-shadow" size="lg">
-        Obtener Mis Resultados
+        Ver Mis Resultados
       </Button>
     </form>
   );
