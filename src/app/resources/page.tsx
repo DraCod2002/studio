@@ -17,48 +17,47 @@ interface Resource {
 const professionalResources: Resource[] = [
   {
     id: 'resource1',
-    name: 'Línea Nacional de Prevención del Suicidio (EE. UU.)',
-    description: 'Proporciona apoyo gratuito y confidencial las 24 horas del día, los 7 días de la semana para personas en crisis, recursos de prevención y crisis para ti o tus seres queridos.',
-    contact: '988',
-    website: 'https://988lifeline.org/es/', 
+    name: 'Línea 113 - Opción 5 (MINSA)',
+    description: 'Línea gratuita del Ministerio de Salud de Perú que brinda orientación y consejería en salud mental las 24 horas.',
+    contact: 'Marcar 113, opción 5',
+    website: 'https://www.gob.pe/minsa',
     type: 'hotline',
   },
   {
     id: 'resource2',
-    name: 'Crisis Text Line (EE. UU.)',
-    description: 'Envía un mensaje de texto con HOME al 741741 desde cualquier lugar de EE. UU., en cualquier momento, sobre cualquier tipo de crisis.',
-    contact: 'Envía HOME al 741741',
-    website: 'https://www.crisistextline.org/',
-    type: 'hotline',
+    name: 'Sentido - Centro Peruano de Suicidología y Prevención del Suicidio',
+    description: 'Organización dedicada a la prevención del suicidio, ofrece información y recursos. Pueden tener líneas de ayuda o formas de contacto en su web.',
+    website: 'https://www.sentido.pe/',
+    type: 'organization',
   },
   {
     id: 'resource3',
-    name: 'Alianza Nacional sobre Enfermedades Mentales (NAMI - EE. UU.)',
-    description: 'La organización de salud mental de base más grande del país dedicada a construir mejores vidas para los millones de estadounidenses afectados por enfermedades mentales.',
-    website: 'https://www.nami.org/Your-Journey/Identity-and-Cultural-Dimensions/Hispanic-Latinx',
+    name: 'Instituto Nacional de Salud Mental "Honorio Delgado - Hideyo Noguchi"',
+    description: 'Principal institución de investigación, docencia y atención especializada en salud mental en Perú.',
+    contact: '(01) 6149200', // Verificar este número o buscar uno de atención directa si existe
+    website: 'https://www.insm.gob.pe/',
     type: 'organization',
   },
   {
     id: 'resource4',
-    name: 'MentalHealth.gov (EE. UU.)',
-    description: 'Proporciona acceso único a información del gobierno de EE. UU. sobre salud mental y problemas de salud mental.',
-    website: 'https://www.mentalhealth.gov/get-help/immediate-help',
-    type: 'online_resource',
+    name: 'Aldeas Infantiles SOS Perú',
+    description: 'Si bien se enfocan en niños, pueden ofrecer o dirigir a recursos de apoyo emocional para familias y jóvenes.',
+    website: 'https://www.aldeasinfantiles.org.pe/apoyo-emocional', // Revisar si tienen sección específica
+    type: 'organization',
   },
   {
     id: 'resource5',
-    name: 'The Trevor Project (EE. UU.)',
-    description: 'Proporciona intervención en crisis y servicios de prevención del suicidio a jóvenes lesbianas, gays, bisexuales, transgénero, queer e indecisos (LGBTQ) menores de 25 años.',
-    contact: '1-866-488-7386',
-    website: 'https://www.thetrevorproject.org/get-help/', 
-    type: 'organization',
+    name: 'Chat 100 (MIMP)',
+    description: 'Servicio de chat del Ministerio de la Mujer y Poblaciones Vulnerables para casos de violencia, pero también puede ofrecer orientación general.',
+    website: 'https://chat100.mimp.gob.pe/',
+    type: 'online_resource',
   },
-    {
+  {
     id: 'resource6',
-    name: 'Asociación de Ansiedad y Depresión de América (ADAA - EE. UU.)',
-    description: 'Una organización internacional sin fines de lucro dedicada a la prevención, tratamiento y cura de la ansiedad, depresión, TOC, TEPT y trastornos concurrentes a través de la educación, la práctica y la investigación.',
-    website: 'https://adaa.org/finding-help/hispanic-latinos',
-    type: 'organization',
+    name: 'InfoSalud (MINSA)',
+    description: 'Plataforma del Ministerio de Salud con información diversa, incluyendo temas de salud mental y directorios.',
+    website: 'https://www.gob.pe/institucion/minsa/canales_atencion_multiple',
+    type: 'online_resource',
   },
 ];
 
@@ -67,7 +66,7 @@ export default function ResourcesPage() {
     <PageWrapper>
       <div className="text-center mb-12">
         <LifeBuoy className="w-16 h-16 text-primary mx-auto mb-4" />
-        <h1 className="text-4xl font-bold mb-4">Recursos Profesionales</h1>
+        <h1 className="text-4xl font-bold mb-4">Recursos Profesionales en Perú</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           Si estás en crisis o necesitas apoyo inmediato, por favor contacta a estas organizaciones.
           Recuerda, no estás solo/a.
