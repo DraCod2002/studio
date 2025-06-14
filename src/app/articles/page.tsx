@@ -1,3 +1,4 @@
+
 import PageWrapper from '@/components/layout/PageWrapper';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -25,7 +26,7 @@ const sampleArticles: Article[] = [
     author: 'Dr. Emily Carter',
     date: 'October 26, 2023',
     imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'student studying',
+    dataAiHint: 'focused student',
     category: 'Academic Stress',
     slug: 'understanding-academic-stress',
   },
@@ -36,7 +37,7 @@ const sampleArticles: Article[] = [
     author: 'John Miller',
     date: 'November 5, 2023',
     imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'office laptop',
+    dataAiHint: 'balanced work',
     category: 'Professional Stress',
     slug: 'work-life-balance',
   },
@@ -47,7 +48,7 @@ const sampleArticles: Article[] = [
     author: 'Aisha Khan',
     date: 'November 12, 2023',
     imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'social media',
+    dataAiHint: 'mindful tech',
     category: 'Technological Stress',
     slug: 'social-media-wellbeing',
   },
@@ -58,7 +59,7 @@ const sampleArticles: Article[] = [
     author: 'Serene Pathways Team',
     date: 'November 18, 2023',
     imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'meditation peace',
+    dataAiHint: 'inner peace',
     category: 'Techniques',
     slug: 'mindfulness-meditation-guide',
   },
@@ -80,11 +81,11 @@ export default function ArticlesPage() {
           <Card key={article.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col animate-slide-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
             <CardHeader className="p-0">
               <div className="relative w-full h-48">
-                <Image 
-                  src={article.imageUrl} 
-                  alt={article.title} 
-                  layout="fill" 
-                  objectFit="cover" 
+                <Image
+                  src={article.imageUrl}
+                  alt={article.title}
+                  layout="fill"
+                  objectFit="cover"
                   className="rounded-t-lg"
                   data-ai-hint={article.dataAiHint}
                 />
@@ -105,7 +106,7 @@ export default function ArticlesPage() {
             <CardFooter className="px-6 pb-6">
               {/* This button can link to a full article page in the future */}
               <Button asChild variant="outline" className="w-full">
-                <Link href={`/articles/${article.slug}`}> 
+                <Link href={`/articles/${article.slug}`}>
                   Read More <ExternalLink className="ml-2 h-4 w-4" />
                 </Link>
               </Button>

@@ -1,3 +1,4 @@
+
 import PageWrapper from '@/components/layout/PageWrapper';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -13,7 +14,7 @@ const categoryDetails: { [key: string]: { title: string; description: string; lo
     description: 'Explore information and resources related to academic stress.',
     longDescription: 'Academic stress stems from the pressures of exams, assignments, deadlines, and the overall school environment. It can affect students at all levels. This section provides insights into managing study load, coping with exam anxiety, and maintaining a healthy balance during your academic journey.',
     icon: School,
-    dataAiHint: 'student library',
+    dataAiHint: 'peaceful study',
     imageUrl: 'https://placehold.co/800x400.png',
   },
   professional: {
@@ -21,7 +22,7 @@ const categoryDetails: { [key: string]: { title: string; description: string; lo
     description: 'Explore information and resources related to professional stress.',
     longDescription: 'Work-related stress can arise from demanding deadlines, challenging projects, workplace dynamics, and career uncertainties. Learn about strategies for managing workload, improving work-life balance, dealing with difficult colleagues, and preventing burnout in your professional life.',
     icon: Briefcase,
-    dataAiHint: 'office meeting',
+    dataAiHint: 'calm office',
     imageUrl: 'https://placehold.co/800x400.png',
   },
   relational: {
@@ -29,7 +30,7 @@ const categoryDetails: { [key: string]: { title: string; description: string; lo
     description: 'Explore information and resources related to relational stress.',
     longDescription: 'Stress in personal relationships with family, friends, or partners can significantly impact well-being. This section covers topics like communication skills, conflict resolution, setting boundaries, and nurturing healthy connections to reduce interpersonal stress.',
     icon: Users,
-    dataAiHint: 'friends talking',
+    dataAiHint: 'supportive friends',
     imageUrl: 'https://placehold.co/800x400.png',
   },
   technological: {
@@ -37,7 +38,7 @@ const categoryDetails: { [key: string]: { title: string; description: string; lo
     description: 'Explore information and resources related to technological stress.',
     longDescription: 'The constant connectivity, social media pressures, and information overload from digital devices can be a major source of stress. Discover ways to manage your digital life, practice mindful technology use, and reduce the anxiety associated with being "always on".',
     icon: Smartphone,
-    dataAiHint: 'person phone',
+    dataAiHint: 'digital detox',
     imageUrl: 'https://placehold.co/800x400.png',
   },
   financial: {
@@ -45,7 +46,7 @@ const categoryDetails: { [key: string]: { title: string; description: string; lo
     description: 'Explore information and resources related to financial stress.',
     longDescription: 'Worries about money, debt, budgeting, and economic stability are common stressors. This section offers guidance on financial planning, coping with financial anxiety, and finding resources to manage your finances more effectively.',
     icon: CreditCard,
-    dataAiHint: 'money coins',
+    dataAiHint: 'secure savings',
     imageUrl: 'https://placehold.co/800x400.png',
   },
   existential: {
@@ -53,15 +54,15 @@ const categoryDetails: { [key: string]: { title: string; description: string; lo
     description: 'Explore information and resources related to existential stress.',
     longDescription: 'Concerns about life purpose, meaning, mortality, and overall emotional well-being can lead to existential stress. Explore philosophical and mindful approaches to finding meaning, coping with uncertainty, and cultivating inner peace.',
     icon: Brain,
-    dataAiHint: 'meditation thinking',
+    dataAiHint: 'serene thought',
     imageUrl: 'https://placehold.co/800x400.png',
   },
 };
 
 const getCategoryData = (slug: string) => {
-  return categoryDetails[slug] || { 
-    slug, 
-    title: slug.charAt(0).toUpperCase() + slug.slice(1).replace(/-/g, ' ') + ' Stress', 
+  return categoryDetails[slug] || {
+    slug,
+    title: slug.charAt(0).toUpperCase() + slug.slice(1).replace(/-/g, ' ') + ' Stress',
     description: `Details and resources about ${slug.replace(/-/g, ' ')} stress.`,
     longDescription: 'More detailed information about this type of stress will be available soon. Check back for updates and resources.',
     icon: Info,
@@ -87,10 +88,10 @@ export default async function StressCategoryPage({ params }: { params: { categor
 
         <Card className="shadow-xl overflow-hidden">
           <div className="relative w-full h-64 md:h-80">
-            <Image 
-              src={categoryData.imageUrl} 
-              alt={categoryData.title} 
-              layout="fill" 
+            <Image
+              src={categoryData.imageUrl}
+              alt={categoryData.title}
+              layout="fill"
               objectFit="cover"
               data-ai-hint={categoryData.dataAiHint}
               priority

@@ -1,3 +1,4 @@
+
 import PageWrapper from '@/components/layout/PageWrapper';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,7 +9,7 @@ import Image from 'next/image';
 // This is placeholder data. In a real app, you'd fetch this based on the slug.
 const getArticleData = async (slug: string) => {
   // Simulate fetching article data
-  await new Promise(resolve => setTimeout(resolve, 100)); 
+  await new Promise(resolve => setTimeout(resolve, 100));
 
   const articlesDb = [
     {
@@ -18,7 +19,7 @@ const getArticleData = async (slug: string) => {
       author: 'Dr. Emily Carter',
       date: 'October 26, 2023',
       imageUrl: 'https://placehold.co/800x400.png',
-      dataAiHint: 'student library',
+      dataAiHint: 'focused student',
       category: 'Academic Stress',
       slug: 'understanding-academic-stress',
       content: `
@@ -93,10 +94,10 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         <Card className="shadow-xl overflow-hidden">
           {article.imageUrl && (
             <div className="relative w-full h-64 md:h-96">
-              <Image 
-                src={article.imageUrl} 
-                alt={article.title} 
-                layout="fill" 
+              <Image
+                src={article.imageUrl}
+                alt={article.title}
+                layout="fill"
                 objectFit="cover"
                 data-ai-hint={article.dataAiHint}
                 priority // Prioritize loading the main article image
@@ -122,9 +123,9 @@ export default async function ArticlePage({ params }: { params: { slug: string }
             </div>
           </CardHeader>
           <CardContent className="p-6 md:p-8">
-            <div 
+            <div
               className="prose dark:prose-invert max-w-none text-lg leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: article.content || article.summary }} 
+              dangerouslySetInnerHTML={{ __html: article.content || article.summary }}
             />
           </CardContent>
         </Card>
