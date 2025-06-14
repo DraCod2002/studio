@@ -1,14 +1,14 @@
 
 'use server';
 
-// It's STRONGLY recommended to move this key to a .env.local file.
-// Create a .env.local file in the root of your project with:
-// PIXABAY_API_KEY=YOUR_ACTUAL_PIXABAY_API_KEY
-// The key you provided (41934519-a36f6965d8021c8eb21f6fba8) is used as a fallback here.
+// Se RECOMIENDA ENCARECIDAMENTE mover esta clave a un archivo .env.local.
+// Crea un archivo .env.local en la raíz de tu proyecto con:
+// PIXABAY_API_KEY=TU_CLAVE_API_REAL_DE_PIXABAY
+// La clave que proporcionaste (41934519-a36f6965d8021c8eb21f6fba8) se usa como respaldo aquí.
 const PIXABAY_API_KEY = process.env.PIXABAY_API_KEY || '41934519-a36f6965d8021c8eb21f6fba8';
 const PIXABAY_API_URL = 'https://pixabay.com/api/';
 
-// Default placeholder if no image is found or API key issue
+// Marcador de posición predeterminado si no se encuentra ninguna imagen o hay un problema con la clave API
 const DEFAULT_PLACEHOLDER_BASE = 'https://placehold.co/600x400.png';
 
 
@@ -16,7 +16,7 @@ interface PixabayHit {
   id: number;
   largeImageURL: string;
   webformatURL: string;
-  // Add other fields if needed, like tags, user, etc.
+  // Agrega otros campos si es necesario, como etiquetas, usuario, etc.
 }
 
 interface PixabayResponse {
@@ -28,13 +28,13 @@ interface PixabayResponse {
 export async function fetchPixabayImage(
   query: string,
   orientation: 'horizontal' | 'vertical' | 'all' = 'all',
-  fallbackPlaceholderSeed?: string // To make placeholders unique if needed
+  fallbackPlaceholderSeed?: string // Para hacer que los marcadores de posición sean únicos si es necesario
 ): Promise<string> {
-  const placeholderQuery = fallbackPlaceholderSeed || query || "image";
+  const placeholderQuery = fallbackPlaceholderSeed || query || "imagen";
   const defaultPlaceholder = `${DEFAULT_PLACEHOLDER_BASE}?text=${encodeURIComponent(placeholderQuery)}`;
 
-  if (!PIXABAY_API_KEY || PIXABAY_API_KEY === 'YOUR_PIXABAY_API_KEY_HERE' /* Check for a generic placeholder */) {
-    console.warn('Pixabay API key is not configured or is using a generic placeholder. Please set your PIXABAY_API_KEY in .env.local. Falling back to placeholder image.');
+  if (!PIXABAY_API_KEY || PIXABAY_API_KEY === 'YOUR_PIXABAY_API_KEY_HERE' /* Verifica un marcador de posición genérico */) {
+    console.warn('La clave API de Pixabay no está configurada o está usando un marcador de posición genérico. Por favor, establece tu PIXABAY_API_KEY en .env.local. Volviendo a la imagen de marcador de posición.');
     return defaultPlaceholder;
   }
 
@@ -43,29 +43,30 @@ export async function fetchPixabayImage(
     q: query,
     image_type: 'photo',
     safesearch: 'true',
-    per_page: '5', // Fetch a few to have a chance to pick one
+    per_page: '5', // Obtener algunas para tener la oportunidad de elegir una
     orientation: orientation,
+    lang: 'es', // Solicitar resultados en español si es posible
   });
 
   try {
-    const response = await fetch(`${PIXABAY_API_URL}?${params.toString()}`, { next: { revalidate: 3600 } }); // Cache for 1 hour
+    const response = await fetch(`${PIXABAY_API_URL}?${params.toString()}`, { next: { revalidate: 3600 } }); // Cache por 1 hora
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(`Pixabay API request failed with status ${response.status}: ${errorText}. Query: ${query}`);
-      return `${DEFAULT_PLACEHOLDER_BASE}?text=API+Error`;
+      console.error(`La solicitud a la API de Pixabay falló con el estado ${response.status}: ${errorText}. Consulta: ${query}`);
+      return `${DEFAULT_PLACEHOLDER_BASE}?text=Error+API`;
     }
 
     const data: PixabayResponse = await response.json();
 
     if (data.hits && data.hits.length > 0) {
-      // For simplicity, take the first image. Could add logic to pick based on aspect ratio or other criteria.
+      // Por simplicidad, toma la primera imagen. Se podría agregar lógica para elegir según la relación de aspecto u otros criterios.
       return data.hits[0].largeImageURL || data.hits[0].webformatURL;
     } else {
-      console.log(`No images found on Pixabay for query: "${query}"`);
-      return `${DEFAULT_PLACEHOLDER_BASE}?text=${encodeURIComponent("No image: " + query.substring(0,20))}`;
+      console.log(`No se encontraron imágenes en Pixabay para la consulta: "${query}"`);
+      return `${DEFAULT_PLACEHOLDER_BASE}?text=${encodeURIComponent("Sin imagen: " + query.substring(0,20))}`;
     }
   } catch (error) {
-    console.error(`Error fetching image from Pixabay for query "${query}":`, error);
-    return `${DEFAULT_PLACEHOLDER_BASE}?text=Fetch+Error`;
+    console.error(`Error al obtener la imagen de Pixabay para la consulta "${query}":`, error);
+    return `${DEFAULT_PLACEHOLDER_BASE}?text=Error+Obtencion`;
   }
 }

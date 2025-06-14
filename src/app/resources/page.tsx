@@ -17,47 +17,47 @@ interface Resource {
 const professionalResources: Resource[] = [
   {
     id: 'resource1',
-    name: 'National Suicide Prevention Lifeline (USA)',
-    description: 'Provides 24/7, free and confidential support for people in distress, prevention and crisis resources for you or your loved ones.',
+    name: 'Línea Nacional de Prevención del Suicidio (EE. UU.)',
+    description: 'Proporciona apoyo gratuito y confidencial las 24 horas del día, los 7 días de la semana para personas en crisis, recursos de prevención y crisis para ti o tus seres queridos.',
     contact: '988',
-    website: 'https://988lifeline.org/',
+    website: 'https://988lifeline.org/es/', 
     type: 'hotline',
   },
   {
     id: 'resource2',
-    name: 'Crisis Text Line',
-    description: 'Text HOME to 741741 from anywhere in the US, anytime, about any type of crisis.',
-    contact: 'Text HOME to 741741',
+    name: 'Crisis Text Line (EE. UU.)',
+    description: 'Envía un mensaje de texto con HOME al 741741 desde cualquier lugar de EE. UU., en cualquier momento, sobre cualquier tipo de crisis.',
+    contact: 'Envía HOME al 741741',
     website: 'https://www.crisistextline.org/',
     type: 'hotline',
   },
   {
     id: 'resource3',
-    name: 'National Alliance on Mental Illness (NAMI)',
-    description: 'The nation’s largest grassroots mental health organization dedicated to building better lives for the millions of Americans affected by mental illness.',
-    website: 'https://www.nami.org/',
+    name: 'Alianza Nacional sobre Enfermedades Mentales (NAMI - EE. UU.)',
+    description: 'La organización de salud mental de base más grande del país dedicada a construir mejores vidas para los millones de estadounidenses afectados por enfermedades mentales.',
+    website: 'https://www.nami.org/Your-Journey/Identity-and-Cultural-Dimensions/Hispanic-Latinx',
     type: 'organization',
   },
   {
     id: 'resource4',
-    name: 'MentalHealth.gov',
-    description: 'Provides one-stop access to U.S. government mental health and mental health problems information.',
-    website: 'https://www.mentalhealth.gov/',
+    name: 'MentalHealth.gov (EE. UU.)',
+    description: 'Proporciona acceso único a información del gobierno de EE. UU. sobre salud mental y problemas de salud mental.',
+    website: 'https://www.mentalhealth.gov/get-help/immediate-help',
     type: 'online_resource',
   },
   {
     id: 'resource5',
-    name: 'The Trevor Project',
-    description: 'Provides crisis intervention and suicide prevention services to lesbian, gay, bisexual, transgender, queer & questioning (LGBTQ) young people under 25.',
+    name: 'The Trevor Project (EE. UU.)',
+    description: 'Proporciona intervención en crisis y servicios de prevención del suicidio a jóvenes lesbianas, gays, bisexuales, transgénero, queer e indecisos (LGBTQ) menores de 25 años.',
     contact: '1-866-488-7386',
-    website: 'https://www.thetrevorproject.org/',
+    website: 'https://www.thetrevorproject.org/get-help/', 
     type: 'organization',
   },
     {
     id: 'resource6',
-    name: 'Anxiety & Depression Association of America (ADAA)',
-    description: 'An international nonprofit organization dedicated to the prevention, treatment, and cure of anxiety, depression, OCD, PTSD, and co-occurring disorders through education, practice, and research.',
-    website: 'https://adaa.org/',
+    name: 'Asociación de Ansiedad y Depresión de América (ADAA - EE. UU.)',
+    description: 'Una organización internacional sin fines de lucro dedicada a la prevención, tratamiento y cura de la ansiedad, depresión, TOC, TEPT y trastornos concurrentes a través de la educación, la práctica y la investigación.',
+    website: 'https://adaa.org/finding-help/hispanic-latinos',
     type: 'organization',
   },
 ];
@@ -67,10 +67,10 @@ export default function ResourcesPage() {
     <PageWrapper>
       <div className="text-center mb-12">
         <LifeBuoy className="w-16 h-16 text-primary mx-auto mb-4" />
-        <h1 className="text-4xl font-bold mb-4">Professional Resources</h1>
+        <h1 className="text-4xl font-bold mb-4">Recursos Profesionales</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          If you are in crisis or need immediate support, please reach out to these organizations.
-          Remember, you are not alone.
+          Si estás en crisis o necesitas apoyo inmediato, por favor contacta a estas organizaciones.
+          Recuerda, no estás solo/a.
         </p>
       </div>
 
@@ -89,7 +89,7 @@ export default function ResourcesPage() {
               <CardDescription className="text-base mb-4">{resource.description}</CardDescription>
               {resource.contact && (
                 <p className="text-sm mb-2">
-                  <strong>Contact:</strong> {resource.contact}
+                  <strong>Contacto:</strong> {resource.contact}
                 </p>
               )}
             </CardContent>
@@ -97,7 +97,7 @@ export default function ResourcesPage() {
               <div className="p-6 pt-0 mt-auto">
                 <Button asChild variant="outline" className="w-full">
                   <Link href={resource.website} target="_blank" rel="noopener noreferrer">
-                    Visit Website <ExternalLink className="ml-2 h-4 w-4" />
+                    Visitar Sitio Web <ExternalLink className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </div>
@@ -108,12 +108,12 @@ export default function ResourcesPage() {
        <Card className="mt-12 bg-primary/10 border-primary shadow-lg">
         <CardHeader>
           <CardTitle className="text-xl text-primary flex items-center">
-            <AlertTriangle className="mr-2 h-5 w-5" /> Important Disclaimer
+            <AlertTriangle className="mr-2 h-5 w-5" /> Descargo de Responsabilidad Importante
           </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground">
-            The information provided on Serene Pathways, including the chatbot and stress test, is for informational and educational purposes only. It is not intended as a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. If you are in a crisis, please contact emergency services or a crisis hotline immediately.
+            La información proporcionada en Serenamente, incluyendo el chatbot y el test de estrés, es solo para fines informativos y educativos. No pretende ser un sustituto del consejo, diagnóstico o tratamiento médico profesional. Siempre busca el consejo de tu médico u otro proveedor de salud calificado con cualquier pregunta que puedas tener sobre una condición médica. Si estás en una crisis, por favor contacta a los servicios de emergencia o a una línea de crisis inmediatamente.
           </p>
         </CardContent>
       </Card>

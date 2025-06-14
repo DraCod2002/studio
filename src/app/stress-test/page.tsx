@@ -11,10 +11,10 @@ export default function StressTestPage() {
           <div className="flex justify-center items-center mb-4">
             <ClipboardList className="w-12 h-12 text-primary" />
           </div>
-          <CardTitle className="text-3xl font-bold">Stress Level Assessment</CardTitle>
+          <CardTitle className="text-3xl font-bold">Evaluación de Nivel de Estrés</CardTitle>
           <CardDescription className="text-lg text-muted-foreground">
-            Answer a few questions to get a basic understanding of your current stress level.
-            This is not a diagnostic tool.
+            Responde algunas preguntas para obtener una comprensión básica de tu nivel de estrés actual.
+            Esto no es una herramienta de diagnóstico.
           </CardDescription>
         </CardHeader>
         <CardContent>

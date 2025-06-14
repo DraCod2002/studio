@@ -16,63 +16,63 @@ interface Question {
 const questions: Question[] = [
   {
     id: 'q1',
-    text: 'How often have you felt overwhelmed in the past week?',
+    text: '¿Con qué frecuencia te has sentido abrumado/a en la última semana?',
     options: [
-      { label: 'Never', value: 0 },
-      { label: 'Rarely', value: 1 },
-      { label: 'Sometimes', value: 2 },
-      { label: 'Often', value: 3 },
-      { label: 'Very Often', value: 4 },
+      { label: 'Nunca', value: 0 },
+      { label: 'Raramente', value: 1 },
+      { label: 'A veces', value: 2 },
+      { label: 'A menudo', value: 3 },
+      { label: 'Muy a menudo', value: 4 },
     ],
   },
   {
     id: 'q2',
-    text: 'How often have you had trouble relaxing in the past week?',
+    text: '¿Con qué frecuencia has tenido problemas para relajarte en la última semana?',
     options: [
-      { label: 'Never', value: 0 },
-      { label: 'Rarely', value: 1 },
-      { label: 'Sometimes', value: 2 },
-      { label: 'Often', value: 3 },
-      { label: 'Very Often', value: 4 },
+      { label: 'Nunca', value: 0 },
+      { label: 'Raramente', value: 1 },
+      { label: 'A veces', value: 2 },
+      { label: 'A menudo', value: 3 },
+      { label: 'Muy a menudo', value: 4 },
     ],
   },
   {
     id: 'q3',
-    text: 'How often have you felt irritable or easily annoyed in the past week?',
+    text: '¿Con qué frecuencia te has sentido irritable o te has enfadado fácilmente en la última semana?',
     options: [
-      { label: 'Never', value: 0 },
-      { label: 'Rarely', value: 1 },
-      { label: 'Sometimes', value: 2 },
-      { label: 'Often', value: 3 },
-      { label: 'Very Often', value: 4 },
+      { label: 'Nunca', value: 0 },
+      { label: 'Raramente', value: 1 },
+      { label: 'A veces', value: 2 },
+      { label: 'A menudo', value: 3 },
+      { label: 'Muy a menudo', value: 4 },
     ],
   },
     {
     id: 'q4',
-    text: 'How often have you found it hard to concentrate in the past week?',
+    text: '¿Con qué frecuencia te ha costado concentrarte en la última semana?',
     options: [
-      { label: 'Never', value: 0 },
-      { label: 'Rarely', value: 1 },
-      { label: 'Sometimes', value: 2 },
-      { label: 'Often', value: 3 },
-      { label: 'Very Often', value: 4 },
+      { label: 'Nunca', value: 0 },
+      { label: 'Raramente', value: 1 },
+      { label: 'A veces', value: 2 },
+      { label: 'A menudo', value: 3 },
+      { label: 'Muy a menudo', value: 4 },
     ],
   },
   {
     id: 'q5',
-    text: 'How often have you felt worried or anxious in the past week?',
+    text: '¿Con qué frecuencia te has sentido preocupado/a o ansioso/a en la última semana?',
     options: [
-      { label: 'Never', value: 0 },
-      { label: 'Rarely', value: 1 },
-      { label: 'Sometimes', value: 2 },
-      { label: 'Often', value: 3 },
-      { label: 'Very Often', value: 4 },
+      { label: 'Nunca', value: 0 },
+      { label: 'Raramente', value: 1 },
+      { label: 'A veces', value: 2 },
+      { label: 'A menudo', value: 3 },
+      { label: 'Muy a menudo', value: 4 },
     ],
   },
 ];
 
 interface Answers {
-  [key: string]: string; // Store option value as string
+  [key: string]: string; 
 }
 
 export default function StressTestForm() {
@@ -90,7 +90,7 @@ export default function StressTestForm() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (Object.keys(answers).length !== questions.length) {
-      alert('Please answer all questions.'); // Replace with a proper toast or inline message
+      alert('Por favor, responde todas las preguntas.'); 
       return;
     }
     
@@ -103,13 +103,13 @@ export default function StressTestForm() {
   };
 
   const getStressLevel = (currentScore: number | null) => {
-    if (currentScore === null) return { level: '', advice: '', icon: Activity };
+    if (currentScore === null) return { level: '', advice: '', icon: Activity, color: '' };
     if (currentScore <= 6) {
-      return { level: 'Low Stress', advice: 'You seem to be managing stress well. Keep up the good work with healthy habits!', icon: CheckCircle, color: 'text-green-500' };
+      return { level: 'Estrés Bajo', advice: 'Pareces estar manejando bien el estrés. ¡Sigue así con hábitos saludables!', icon: CheckCircle, color: 'text-green-500' };
     } else if (currentScore <= 12) {
-      return { level: 'Moderate Stress', advice: 'You might be experiencing some stress. Consider exploring relaxation techniques and self-care practices.', icon: Activity, color: 'text-yellow-500' };
+      return { level: 'Estrés Moderado', advice: 'Podrías estar experimentando algo de estrés. Considera explorar técnicas de relajación y prácticas de autocuidado.', icon: Activity, color: 'text-yellow-500' };
     } else {
-      return { level: 'High Stress', advice: 'Your stress levels appear to be high. It might be beneficial to seek support, practice stress-reduction techniques consistently, and consider talking to a professional if needed.', icon: AlertTriangle, color: 'text-red-500' };
+      return { level: 'Estrés Alto', advice: 'Tus niveles de estrés parecen ser altos. Podría ser beneficioso buscar apoyo, practicar técnicas de reducción de estrés consistentemente y considerar hablar con un profesional si es necesario.', icon: AlertTriangle, color: 'text-red-500' };
     }
   };
 
@@ -127,13 +127,13 @@ export default function StressTestForm() {
           <div className="flex justify-center items-center mb-4">
             <Icon className={`w-16 h-16 ${color}`} />
           </div>
-          <CardTitle className="text-2xl font-bold">Your Stress Assessment Result</CardTitle>
+          <CardTitle className="text-2xl font-bold">Resultado de tu Evaluación de Estrés</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-xl font-semibold mb-2">Score: {score} / {questions.length * 4}</p>
+          <p className="text-xl font-semibold mb-2">Puntuación: {score} / {questions.length * 4}</p>
           <p className={`text-2xl font-bold mb-4 ${color}`}>{level}</p>
           <p className="text-muted-foreground mb-6 text-base">{advice}</p>
-          <Button onClick={resetTest} className="w-full sm:w-auto">Take Test Again</Button>
+          <Button onClick={resetTest} className="w-full sm:w-auto">Realizar Test de Nuevo</Button>
         </CardContent>
       </Card>
     );
@@ -143,7 +143,7 @@ export default function StressTestForm() {
     <form onSubmit={handleSubmit} className="space-y-8">
       {questions.map((question, index) => (
         <fieldset key={question.id} className="space-y-3 p-4 border rounded-lg shadow-sm bg-card animate-slide-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-          <legend className="text-lg font-medium mb-2 text-primary-foreground bg-primary px-3 py-1 rounded-md">{`Question ${index + 1}: ${question.text}`}</legend>
+          <legend className="text-lg font-medium mb-2 text-primary-foreground bg-primary px-3 py-1 rounded-md">{`Pregunta ${index + 1}: ${question.text}`}</legend>
           <RadioGroup
             onValueChange={(value) => handleInputChange(question.id, value)}
             value={answers[question.id]}
@@ -162,7 +162,7 @@ export default function StressTestForm() {
         </fieldset>
       ))}
       <Button type="submit" className="w-full text-lg py-3 mt-6 shadow-md hover:shadow-lg transition-shadow" size="lg">
-        Get My Results
+        Obtener Mis Resultados
       </Button>
     </form>
   );

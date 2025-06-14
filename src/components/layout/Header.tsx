@@ -1,3 +1,4 @@
+
 // src/components/layout/Header.tsx
 "use client";
 
@@ -11,11 +12,11 @@ import { useTheme } from "next-themes";
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { href: '/', label: 'Home' },
+  { href: '/', label: 'Inicio' },
   { href: '/chatbot', label: 'Chatbot' },
-  { href: '/stress-test', label: 'Stress Test' },
-  { href: '/articles', label: 'Articles' },
-  { href: '/resources', label: 'Resources' },
+  { href: '/stress-test', label: 'Test de Estrés' },
+  { href: '/articles', label: 'Artículos' },
+  { href: '/resources', label: 'Recursos' },
 ];
 
 export default function Header() {
@@ -61,14 +62,14 @@ export default function Header() {
   );
 
   if (!mounted) {
-    return ( // Render a placeholder or null during SSR to avoid hydration mismatch
+    return ( 
         <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-8">
             <Link href="/" className="flex items-center space-x-2 text-lg font-bold">
               <Sparkles className="h-6 w-6 text-primary" />
-              <span className="font-headline">Serene Pathways</span>
+              <span className="font-headline">Serenamente</span>
             </Link>
-            <div className="h-8 w-8 rounded-full bg-muted animate-pulse" /> {/* Placeholder for theme toggle */}
+            <div className="h-8 w-8 rounded-full bg-muted animate-pulse" /> 
           </div>
         </header>
     );
@@ -77,9 +78,9 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center space-x-2 text-lg font-bold" aria-label="Serene Pathways Home">
+        <Link href="/" className="flex items-center space-x-2 text-lg font-bold" aria-label="Serenamente Inicio">
           <Sparkles className="h-6 w-6 text-primary" />
-          <span className="font-headline">Serene Pathways</span>
+          <span className="font-headline">Serenamente</span>
         </Link>
 
         <nav className="hidden md:flex items-center space-x-2 lg:space-x-4">
@@ -93,14 +94,14 @@ export default function Header() {
             variant="ghost"
             size="icon"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            aria-label={theme === "light" ? "Switch to dark theme" : "Switch to light theme"}
+            aria-label={theme === "light" ? "Cambiar a tema oscuro" : "Cambiar a tema claro"}
           >
             {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
           </Button>
 
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open menu">
+              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Abrir menú">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
@@ -109,10 +110,10 @@ export default function Header() {
                 <div className="flex justify-between items-center">
                    <Link href="/" className="flex items-center space-x-2 text-lg font-bold" onClick={() => setIsMobileMenuOpen(false)}>
                     <Sparkles className="h-6 w-6 text-primary" />
-                    <span className="font-headline">Serene Pathways</span>
+                    <span className="font-headline">Serenamente</span>
                   </Link>
                   <SheetClose asChild>
-                     <Button variant="ghost" size="icon" aria-label="Close menu">
+                     <Button variant="ghost" size="icon" aria-label="Cerrar menú">
                         <X className="h-6 w-6" />
                       </Button>
                   </SheetClose>

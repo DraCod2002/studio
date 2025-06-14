@@ -9,55 +9,55 @@ import { fetchPixabayImage } from '@/services/image-service';
 
 const stressCategories = [
   {
-    title: 'Academic Stress',
-    description: 'Pressure from exams, assignments, and school life.',
+    title: 'Estrés Académico',
+    description: 'Presión por exámenes, tareas y vida escolar.',
     icon: School,
     link: '/stress/academic',
-    dataAiHint: 'study library', // Updated hint
+    dataAiHint: 'estudio biblioteca',
   },
   {
-    title: 'Professional Stress',
-    description: 'Work-related tension, deadlines, and career challenges.',
+    title: 'Estrés Profesional',
+    description: 'Tensión laboral, plazos y desafíos profesionales.',
     icon: Briefcase,
     link: '/stress/professional',
-    dataAiHint: 'calm office desk', // Updated hint
+    dataAiHint: 'escritorio oficina tranquilo',
   },
   {
-    title: 'Relational Stress',
-    description: 'Difficulties in personal relationships with family or friends.',
+    title: 'Estrés Relacional',
+    description: 'Dificultades en relaciones personales con familia o amigos.',
     icon: Users,
     link: '/stress/relational',
-    dataAiHint: 'friends talking', // Updated hint
+    dataAiHint: 'amigos hablando',
   },
   {
-    title: 'Technological Stress',
-    description: 'Overwhelm from social media, notifications, and digital life.',
+    title: 'Estrés Tecnológico',
+    description: 'Sobrecarga por redes sociales, notificaciones y vida digital.',
     icon: Smartphone,
     link: '/stress/technological',
-    dataAiHint: 'person relaxing phone', // Updated hint
+    dataAiHint: 'persona relajandose telefono',
   },
   {
-    title: 'Financial Stress',
-    description: 'Worries about money, debt, and economic stability.',
+    title: 'Estrés Financiero',
+    description: 'Preocupaciones por dinero, deudas y estabilidad económica.',
     icon: CreditCard,
     link: '/stress/financial',
-    dataAiHint: 'savings piggy bank', // Updated hint
+    dataAiHint: 'ahorros alcancia',
   },
   {
-    title: 'Existential Stress',
-    description: 'Concerns about life purpose, meaning, and emotional well-being.',
+    title: 'Estrés Existencial',
+    description: 'Inquietudes sobre el propósito de vida, significado y bienestar emocional.',
     icon: Brain,
     link: '/stress/existential',
-    dataAiHint: 'thoughtful person nature', // Updated hint
+    dataAiHint: 'persona pensativa naturaleza',
   },
 ];
 
 export default async function HomePage() {
-  const heroImageHint = "meditation nature";
+  const heroImageHint = "meditacion naturaleza";
   const heroImageUrl = await fetchPixabayImage(heroImageHint, 'all', 'hero');
   
-  const calmSceneryHint = "calm landscape";
-  const calmSceneryImageUrl = await fetchPixabayImage(calmSceneryHint, 'horizontal', 'calm-scenery');
+  const calmSceneryHint = "paisaje calmado";
+  const calmSceneryImageUrl = await fetchPixabayImage(calmSceneryHint, 'horizontal', 'paisaje-calmado');
 
   return (
     <PageWrapper>
@@ -65,31 +65,32 @@ export default async function HomePage() {
         <div className="relative w-48 h-48 md:w-60 md:h-60 mx-auto mb-8">
           <Image 
             src={heroImageUrl} 
-            alt="Calm meditating person in nature" 
+            alt="Persona calmada meditando en la naturaleza" 
             layout="fill"
             objectFit="cover"
             className="rounded-full shadow-xl"
+            data-ai-hint={heroImageHint}
             priority
           />
         </div>
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary-foreground animate-fade-in tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-secondary-foreground ">
-          Welcome to Serene Pathways
+          Bienvenido a Serenamente
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
-          Your personal guide to understanding, managing, and reducing stress for a more peaceful life.
+          Tu guía personal para comprender, manejar y reducir el estrés para una vida más pacífica.
         </p>
         <div className="space-x-4 animate-slide-in-up" style={{ animationDelay: '0.4s' }}>
           <Button asChild size="lg" className="shadow-lg hover:shadow-xl transition-shadow">
-            <Link href="/chatbot">Chat with Support Bot <ArrowRight className="ml-2 h-5 w-5" /></Link>
+            <Link href="/chatbot">Chatea con el Bot de Apoyo <ArrowRight className="ml-2 h-5 w-5" /></Link>
           </Button>
           <Button asChild variant="outline" size="lg" className="shadow-lg hover:shadow-xl transition-shadow">
-            <Link href="/stress-test">Take Stress Test</Link>
+            <Link href="/stress-test">Realiza el Test de Estrés</Link>
           </Button>
         </div>
       </section>
 
       <section className="py-16 md:py-24">
-        <h2 className="text-3xl font-bold text-center mb-12">Explore Stress Management</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">Explora el Manejo del Estrés</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {stressCategories.map((category, index) => (
             <Link key={category.title} href={category.link} passHref className="flex">
@@ -113,25 +114,26 @@ export default async function HomePage() {
       <section className="py-16 md:py-24 bg-muted/50 rounded-lg shadow-sm">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <h2 className="text-3xl font-bold mb-6">Ready to Find Your Calm?</h2>
+            <h2 className="text-3xl font-bold mb-6">¿Listo para Encontrar tu Calma?</h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Our tools and resources are designed to help you navigate life's challenges with greater ease and resilience. Discover personalized strategies and support.
+              Nuestras herramientas y recursos están diseñados para ayudarte a navegar los desafíos de la vida con mayor facilidad y resiliencia. Descubre estrategias y apoyo personalizados.
             </p>
             <div className="space-y-4 md:space-y-0 md:space-x-4">
               <Button asChild size="lg" className="w-full md:w-auto shadow-md hover:shadow-lg transition-shadow">
-                <Link href="/articles">Read Articles</Link>
+                <Link href="/articles">Leer Artículos</Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="w-full md:w-auto shadow-md hover:shadow-lg transition-shadow">
-                <Link href="/resources">Find Professionals</Link>
+                <Link href="/resources">Encontrar Profesionales</Link>
               </Button>
             </div>
           </div>
           <div className="relative w-full h-64 md:h-80 rounded-lg overflow-hidden shadow-xl">
              <Image 
                 src={calmSceneryImageUrl} 
-                alt="Peaceful scenery" 
+                alt="Paisaje tranquilo" 
                 layout="fill"
                 objectFit="cover"
+                data-ai-hint={calmSceneryHint}
               />
           </div>
         </div>

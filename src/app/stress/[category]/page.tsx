@@ -14,53 +14,53 @@ type CategoryDetails = {
     description: string;
     longDescription: string;
     icon: React.ElementType;
-    dataAiHint: string; // This will be used for fetching the image
-    defaultImageUrl?: string; // Fallback placeholder if needed
+    dataAiHint: string; 
+    defaultImageUrl?: string; 
   };
 };
 
 const categoryDetailsData: CategoryDetails = {
   academic: {
-    title: 'Academic Stress',
-    description: 'Explore information and resources related to academic stress.',
-    longDescription: 'Academic stress stems from the pressures of exams, assignments, deadlines, and the overall school environment. It can affect students at all levels. This section provides insights into managing study load, coping with exam anxiety, and maintaining a healthy balance during your academic journey.',
+    title: 'Estrés Académico',
+    description: 'Explora información y recursos relacionados con el estrés académico.',
+    longDescription: 'El estrés académico surge de la presión de los exámenes, tareas, plazos y el entorno escolar en general. Puede afectar a estudiantes de todos los niveles. Esta sección proporciona ideas para manejar la carga de estudio, afrontar la ansiedad ante los exámenes y mantener un equilibrio saludable durante tu trayectoria académica.',
     icon: School,
-    dataAiHint: 'peaceful study library',
+    dataAiHint: 'estudio biblioteca tranquilo',
   },
   professional: {
-    title: 'Professional Stress',
-    description: 'Explore information and resources related to professional stress.',
-    longDescription: 'Work-related stress can arise from demanding deadlines, challenging projects, workplace dynamics, and career uncertainties. Learn about strategies for managing workload, improving work-life balance, dealing with difficult colleagues, and preventing burnout in your professional life.',
+    title: 'Estrés Profesional',
+    description: 'Explora información y recursos relacionados con el estrés profesional.',
+    longDescription: 'El estrés laboral puede surgir de plazos exigentes, proyectos desafiantes, dinámicas en el lugar de trabajo e incertidumbres profesionales. Aprende estrategias para gestionar la carga de trabajo, mejorar el equilibrio entre la vida laboral y personal, lidiar con colegas difíciles y prevenir el agotamiento en tu vida profesional.',
     icon: Briefcase,
-    dataAiHint: 'calm modern office',
+    dataAiHint: 'oficina moderna tranquila',
   },
   relational: {
-    title: 'Relational Stress',
-    description: 'Explore information and resources related to relational stress.',
-    longDescription: 'Stress in personal relationships with family, friends, or partners can significantly impact well-being. This section covers topics like communication skills, conflict resolution, setting boundaries, and nurturing healthy connections to reduce interpersonal stress.',
+    title: 'Estrés Relacional',
+    description: 'Explora información y recursos relacionados con el estrés relacional.',
+    longDescription: 'El estrés en las relaciones personales con la familia, amigos o pareja puede afectar significativamente el bienestar. Esta sección cubre temas como habilidades de comunicación, resolución de conflictos, establecimiento de límites y fomento de conexiones saludables para reducir el estrés interpersonal.',
     icon: Users,
-    dataAiHint: 'supportive friends chat',
+    dataAiHint: 'amigos solidarios conversando',
   },
   technological: {
-    title: 'Technological Stress',
-    description: 'Explore information and resources related to technological stress.',
-    longDescription: 'The constant connectivity, social media pressures, and information overload from digital devices can be a major source of stress. Discover ways to manage your digital life, practice mindful technology use, and reduce the anxiety associated with being "always on".',
+    title: 'Estrés Tecnológico',
+    description: 'Explora información y recursos relacionados con el estrés tecnológico.',
+    longDescription: 'La conectividad constante, las presiones de las redes sociales y la sobrecarga de información de los dispositivos digitales pueden ser una fuente importante de estrés. Descubre formas de gestionar tu vida digital, practicar el uso consciente de la tecnología y reducir la ansiedad asociada con estar "siempre conectado".',
     icon: Smartphone,
-    dataAiHint: 'person relaxing nature phone',
+    dataAiHint: 'persona relajandose naturaleza telefono',
   },
   financial: {
-    title: 'Financial Stress',
-    description: 'Explore information and resources related to financial stress.',
-    longDescription: 'Worries about money, debt, budgeting, and economic stability are common stressors. This section offers guidance on financial planning, coping with financial anxiety, and finding resources to manage your finances more effectively.',
+    title: 'Estrés Financiero',
+    description: 'Explora información y recursos relacionados con el estrés financiero.',
+    longDescription: 'Las preocupaciones sobre el dinero, las deudas, la elaboración de presupuestos y la estabilidad económica son factores estresantes comunes. Esta sección ofrece orientación sobre planificación financiera, cómo afrontar la ansiedad financiera y encontrar recursos para administrar tus finanzas de manera más eficaz.',
     icon: CreditCard,
-    dataAiHint: 'financial planning desk',
+    dataAiHint: 'planificacion financiera escritorio',
   },
   existential: {
-    title: 'Existential Stress',
-    description: 'Explore information and resources related to existential stress.',
-    longDescription: 'Concerns about life purpose, meaning, mortality, and overall emotional well-being can lead to existential stress. Explore philosophical and mindful approaches to finding meaning, coping with uncertainty, and cultivating inner peace.',
+    title: 'Estrés Existencial',
+    description: 'Explora información y recursos relacionados con el estrés existencial.',
+    longDescription: 'Las preocupaciones sobre el propósito de la vida, el significado, la mortalidad y el bienestar emocional general pueden provocar estrés existencial. Explora enfoques filosóficos y conscientes para encontrar significado, afrontar la incertidumbre y cultivar la paz interior.',
     icon: Brain,
-    dataAiHint: 'serene person thinking nature',
+    dataAiHint: 'persona serena pensando naturaleza',
   },
 };
 
@@ -71,11 +71,11 @@ interface CategoryPageProps {
 async function getCategoryPageData(slug: string) {
   const details = categoryDetailsData[slug] || {
     slug,
-    title: slug.charAt(0).toUpperCase() + slug.slice(1).replace(/-/g, ' ') + ' Stress',
-    description: `Details and resources about ${slug.replace(/-/g, ' ')} stress.`,
-    longDescription: 'More detailed information about this type of stress will be available soon. Check back for updates and resources.',
+    title: slug.charAt(0).toUpperCase() + slug.slice(1).replace(/-/g, ' ') + ' Estrés',
+    description: `Detalles y recursos sobre el estrés ${slug.replace(/-/g, ' ')}.`,
+    longDescription: 'Próximamente habrá disponible información más detallada sobre este tipo de estrés. Vuelve a consultar para obtener actualizaciones y recursos.',
     icon: Info,
-    dataAiHint: 'information help',
+    dataAiHint: 'informacion ayuda',
     defaultImageUrl: `https://placehold.co/800x400.png?text=${encodeURIComponent(slug)}`,
   };
 
@@ -83,7 +83,7 @@ async function getCategoryPageData(slug: string) {
   
   return {
     ...details,
-    imageUrl: imageUrl, // This will be from Pixabay or a placeholder from the service
+    imageUrl: imageUrl, 
   };
 }
 
@@ -97,7 +97,7 @@ export default async function StressCategoryPage({ params }: CategoryPageProps) 
         <div className="mb-8">
           <Button variant="outline" asChild>
             <Link href="/">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Home
+              <ArrowLeft className="mr-2 h-4 w-4" /> Volver al Inicio
             </Link>
           </Button>
         </div>
@@ -109,6 +109,7 @@ export default async function StressCategoryPage({ params }: CategoryPageProps) 
               alt={categoryData.title}
               layout="fill"
               objectFit="cover"
+              data-ai-hint={categoryData.dataAiHint}
               priority
             />
           </div>
@@ -125,26 +126,26 @@ export default async function StressCategoryPage({ params }: CategoryPageProps) 
             <div className="prose dark:prose-invert max-w-none text-lg leading-relaxed">
               <p>{categoryData.longDescription}</p>
               <p className="mt-6">
-                This page provides general information. For more specific articles and tools related to {categoryData.title.toLowerCase()}, please explore our other resources.
+                Esta página proporciona información general. Para artículos y herramientas más específicos relacionados con {categoryData.title.toLowerCase()}, por favor explora nuestros otros recursos.
               </p>
             </div>
           </CardContent>
         </Card>
 
         <div className="mt-12 text-center">
-            <h3 className="text-2xl font-semibold mb-4">Explore Other Resources</h3>
+            <h3 className="text-2xl font-semibold mb-4">Explora Otros Recursos</h3>
             <p className="text-muted-foreground mb-6">
-                Find articles, chat with our AI, or discover professional help.
+                Encuentra artículos, chatea con nuestra IA o descubre ayuda profesional.
             </p>
             <div className="space-x-0 sm:space-x-4 space-y-4 sm:space-y-0 flex flex-col sm:flex-row justify-center">
                 <Button asChild size="lg" className="w-full sm:w-auto">
-                    <Link href="/articles">Read Articles</Link>
+                    <Link href="/articles">Leer Artículos</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-                    <Link href="/chatbot">Chat with AI</Link>
+                    <Link href="/chatbot">Chatear con IA</Link>
                 </Button>
                 <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto">
-                    <Link href="/resources">Find Professionals</Link>
+                    <Link href="/resources">Encontrar Profesionales</Link>
                 </Button>
             </div>
         </div>
@@ -154,9 +155,9 @@ export default async function StressCategoryPage({ params }: CategoryPageProps) 
 }
 
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-  const categoryData = await getCategoryPageData(params.category); // Use the same data fetching
+  const categoryData = await getCategoryPageData(params.category); 
   return {
-    title: `${categoryData.title} | Serene Pathways`,
+    title: `${categoryData.title} | Serenamente`,
     description: categoryData.description,
   };
 }

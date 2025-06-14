@@ -3,7 +3,7 @@ import PageWrapper from '@/components/layout/PageWrapper';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Edit3, ExternalLink } from 'lucide-react'; // Removed BookOpen as Edit3 is used for main icon
+import { Edit3, ExternalLink } from 'lucide-react'; 
 import Image from 'next/image';
 import { fetchPixabayImage } from '@/services/image-service';
 
@@ -16,48 +16,48 @@ interface Article {
   dataAiHint: string;
   category: string;
   slug: string;
-  imageUrl?: string; // To be populated by fetchPixabayImage
+  imageUrl?: string; 
 }
 
 const sampleArticlesData: Omit<Article, 'imageUrl'>[] = [
   {
     id: 'article1',
-    title: 'Understanding Academic Stress: Tips for Students',
-    summary: 'Learn common causes of academic stress and practical strategies to cope effectively during your studies.',
-    author: 'Dr. Emily Carter',
-    date: 'October 26, 2023',
-    dataAiHint: 'focused student library', // Updated hint
-    category: 'Academic Stress',
+    title: 'Comprendiendo el Estrés Académico: Consejos para Estudiantes',
+    summary: 'Aprende las causas comunes del estrés académico y estrategias prácticas para afrontarlo eficazmente durante tus estudios.',
+    author: 'Dra. Emily Carter',
+    date: '26 de octubre de 2023',
+    dataAiHint: 'estudiante concentrado biblioteca',
+    category: 'Estrés Académico',
     slug: 'understanding-academic-stress',
   },
   {
     id: 'article2',
-    title: 'Work-Life Balance in the Modern Age',
-    summary: 'Explore techniques to manage professional stress and cultivate a healthy work-life balance in today\'s demanding environment.',
+    title: 'Equilibrio entre Trabajo y Vida Personal en la Era Moderna',
+    summary: 'Explora técnicas para manejar el estrés profesional y cultivar un equilibrio saludable entre trabajo y vida personal en el entorno exigente de hoy.',
     author: 'John Miller',
-    date: 'November 5, 2023',
-    dataAiHint: 'balanced work life', // Updated hint
-    category: 'Professional Stress',
+    date: '5 de noviembre de 2023',
+    dataAiHint: 'equilibrio laboral personal',
+    category: 'Estrés Profesional',
     slug: 'work-life-balance',
   },
   {
     id: 'article3',
-    title: 'Navigating Social Media and Mental Well-being',
-    summary: 'Discover how technology and social media can impact stress levels and learn mindful approaches to digital consumption.',
+    title: 'Navegando las Redes Sociales y el Bienestar Mental',
+    summary: 'Descubre cómo la tecnología y las redes sociales pueden impactar los niveles de estrés y aprende enfoques conscientes para el consumo digital.',
     author: 'Aisha Khan',
-    date: 'November 12, 2023',
-    dataAiHint: 'mindful social media', // Updated hint
-    category: 'Technological Stress',
+    date: '12 de noviembre de 2023',
+    dataAiHint: 'redes sociales conscientes',
+    category: 'Estrés Tecnológico',
     slug: 'social-media-wellbeing',
   },
   {
     id: 'article4',
-    title: 'Mindfulness Meditation: A Beginner\'s Guide',
-    summary: 'An introduction to mindfulness meditation practices that can help reduce stress and improve overall emotional regulation.',
-    author: 'Serene Pathways Team',
-    date: 'November 18, 2023',
-    dataAiHint: 'peaceful meditation outdoors', // Updated hint
-    category: 'Techniques',
+    title: 'Meditación Mindfulness: Guía para Principiantes',
+    summary: 'Una introducción a las prácticas de meditación mindfulness que pueden ayudar a reducir el estrés y mejorar la regulación emocional general.',
+    author: 'Equipo Serenamente',
+    date: '18 de noviembre de 2023',
+    dataAiHint: 'meditacion pacifica airelibre',
+    category: 'Técnicas',
     slug: 'mindfulness-meditation-guide',
   },
 ];
@@ -82,9 +82,9 @@ export default async function ArticlesPage() {
     <PageWrapper>
       <div className="text-center mb-12">
         <Edit3 className="w-16 h-16 text-primary mx-auto mb-4" />
-        <h1 className="text-4xl font-bold mb-4">Articles & Insights</h1>
+        <h1 className="text-4xl font-bold mb-4">Artículos e Ideas</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Explore a collection of articles and insights on various aspects of stress management and emotional well-being.
+          Explora una colección de artículos e ideas sobre diversos aspectos del manejo del estrés y el bienestar emocional.
         </p>
       </div>
 
@@ -100,6 +100,7 @@ export default async function ArticlesPage() {
                     layout="fill"
                     objectFit="cover"
                     className="rounded-t-lg"
+                    data-ai-hint={article.dataAiHint}
                   />
                 </div>
               )}
@@ -108,7 +109,7 @@ export default async function ArticlesPage() {
                 <CardTitle className="text-xl mt-1 mb-2">{article.title}</CardTitle>
                  {article.author && article.date && (
                   <p className="text-xs text-muted-foreground mb-2">
-                    By {article.author} on {article.date}
+                    Por {article.author} el {article.date}
                   </p>
                 )}
               </div>
@@ -119,7 +120,7 @@ export default async function ArticlesPage() {
             <CardFooter className="px-6 pb-6">
               <Button asChild variant="outline" className="w-full">
                 <Link href={`/articles/${article.slug}`}>
-                  Read More <ExternalLink className="ml-2 h-4 w-4" />
+                  Leer Más <ExternalLink className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </CardFooter>

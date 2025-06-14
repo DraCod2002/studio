@@ -26,7 +26,7 @@ export default function ChatbotUI() {
   const initialMessage: Message = {
     id: 'initial-assistant-message',
     role: 'assistant',
-    content: "Hello! I'm here to help you with stress reduction and emotional support. How are you feeling today?",
+    content: "¡Hola! Estoy aquí para ayudarte con la reducción del estrés y el apoyo emocional. ¿Cómo te sientes hoy?",
   };
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export default function ChatbotUI() {
       
       const chatbotInput: EmotionalSupportChatbotInput = {
         message: input,
-        chatHistory: chatHistoryForAI.slice(-6) // Send last 6 messages as context
+        chatHistory: chatHistoryForAI.slice(-6) 
       };
       
       const result: EmotionalSupportChatbotOutput = await emotionalSupportChatbot(chatbotInput);
@@ -69,17 +69,17 @@ export default function ChatbotUI() {
       };
       setMessages((prevMessages) => [...prevMessages, assistantMessage]);
     } catch (error) {
-      console.error('Error calling chatbot API:', error);
+      console.error('Error al llamar la API del chatbot:', error);
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: "I'm having a little trouble connecting right now. Please try again in a moment.",
+        content: "Estoy teniendo un pequeño problema para conectarme en este momento. Por favor, inténtalo de nuevo en un momento.",
       };
       setMessages((prevMessages) => [...prevMessages, errorMessage]);
       toast({
         variant: "destructive",
-        title: "Chatbot Error",
-        description: "Could not get a response from the chatbot. Please check your connection or try again later.",
+        title: "Error del Chatbot",
+        description: "No se pudo obtener una respuesta del chatbot. Por favor, revisa tu conexión o inténtalo de nuevo más tarde.",
       });
     } finally {
       setIsLoading(false);
@@ -132,7 +132,7 @@ export default function ChatbotUI() {
                 </AvatarFallback>
               </Avatar>
               <div className="p-3 rounded-xl max-w-[70%] shadow-md bg-card text-card-foreground rounded-bl-none border">
-                <p className="text-sm">Thinking...</p>
+                <p className="text-sm">Pensando...</p>
               </div>
             </div>
           )}
@@ -143,12 +143,12 @@ export default function ChatbotUI() {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your message..."
-          aria-label="Chat message input"
+          placeholder="Escribe tu mensaje..."
+          aria-label="Entrada de mensaje del chat"
           className="flex-grow text-base"
           disabled={isLoading}
         />
-        <Button type="submit" size="icon" disabled={isLoading || !input.trim()} aria-label="Send message">
+        <Button type="submit" size="icon" disabled={isLoading || !input.trim()} aria-label="Enviar mensaje">
           {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
         </Button>
       </form>

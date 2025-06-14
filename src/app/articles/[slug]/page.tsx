@@ -18,116 +18,115 @@ interface ArticleData {
   category: string;
   slug: string;
   content: string;
-  imageUrl?: string; // Will be populated
+  imageUrl?: string; 
 }
 
 const articlesDb: Omit<ArticleData, 'imageUrl'>[] = [
   {
     id: 'article1',
-    title: 'Understanding Academic Stress: Tips for Students',
-    summary: 'Learn common causes of academic stress and practical strategies to cope effectively during your studies.',
-    author: 'Dr. Emily Carter',
-    date: 'October 26, 2023',
-    dataAiHint: 'student studying library peaceful', // More specific hint
-    category: 'Academic Stress',
+    title: 'Comprendiendo el Estrés Académico: Consejos para Estudiantes',
+    summary: 'Aprende las causas comunes del estrés académico y estrategias prácticas para afrontarlo eficazmente durante tus estudios.',
+    author: 'Dra. Emily Carter',
+    date: '26 de octubre de 2023',
+    dataAiHint: 'estudiante estudiando biblioteca tranquilo', 
+    category: 'Estrés Académico',
     slug: 'understanding-academic-stress',
     content: `
-      <p>Academic life, while rewarding, can often be a significant source of stress for students. The pressure to perform well in exams, meet assignment deadlines, manage extracurricular activities, and plan for the future can feel overwhelming. Understanding the common triggers of academic stress is the first step towards managing it effectively.</p>
-      <h3 class="text-xl font-semibold mt-6 mb-3 font-headline">Common Causes of Academic Stress:</h3>
+      <p>La vida académica, aunque gratificante, a menudo puede ser una fuente importante de estrés para los estudiantes. La presión por rendir bien en los exámenes, cumplir con los plazos de las tareas, gestionar actividades extracurriculares y planificar el futuro puede resultar abrumadora. Comprender los desencadenantes comunes del estrés académico es el primer paso para gestionarlo eficazmente.</p>
+      <h3 class="text-xl font-semibold mt-6 mb-3 font-headline">Causas Comunes del Estrés Académico:</h3>
       <ul class="list-disc list-inside space-y-1 mb-4">
-        <li>Exam pressure and fear of failure</li>
-        <li>Heavy workload and tight deadlines</li>
-        <li>Difficulty understanding course material</li>
-        <li>Competition with peers</li>
-        <li>Balancing studies with personal life and part-time jobs</li>
-        <li>Future career anxieties</li>
+        <li>Presión por los exámenes y miedo al fracaso</li>
+        <li>Gran carga de trabajo y plazos ajustados</li>
+        <li>Dificultad para comprender el material del curso</li>
+        <li>Competencia con los compañeros</li>
+        <li>Equilibrar los estudios con la vida personal y trabajos a tiempo parcial</li>
+        <li>Ansiedades sobre la futura carrera profesional</li>
       </ul>
-      <h3 class="text-xl font-semibold mt-6 mb-3 font-headline">Practical Strategies for Coping:</h3>
+      <h3 class="text-xl font-semibold mt-6 mb-3 font-headline">Estrategias Prácticas para Afrontarlo:</h3>
       <ol class="list-decimal list-inside space-y-2">
-        <li><strong>Time Management:</strong> Create a realistic study schedule. Break down large tasks into smaller, manageable steps. Prioritize tasks based on importance and deadlines.</li>
-        <li><strong>Effective Study Habits:</strong> Find a study method that works for you. This could include active recall, spaced repetition, or concept mapping. Ensure you have a quiet and comfortable study environment.</li>
-        <li><strong>Seek Support:</strong> Don't hesitate to talk to professors, teaching assistants, academic advisors, or counselors if you're struggling. Study groups can also be beneficial.</li>
-        <li><strong>Prioritize Sleep:</strong> Aim for 7-9 hours of quality sleep per night. Lack of sleep can significantly worsen stress and impair cognitive function.</li>
-        <li><strong>Regular Exercise:</strong> Physical activity is a great stress reliever. Even a short walk or some stretching can make a difference.</li>
-        <li><strong>Mindfulness and Relaxation Techniques:</strong> Practice deep breathing exercises, meditation, or yoga to calm your mind.</li>
-        <li><strong>Healthy Diet:</strong> Fuel your body and brain with nutritious foods. Avoid excessive caffeine and sugary snacks.</li>
-        <li><strong>Set Realistic Goals:</strong> Strive for progress, not perfection. Celebrate small victories along the way.</li>
-        <li><strong>Take Regular Breaks:</strong> Short breaks during study sessions can improve focus and reduce fatigue.</li>
-        <li><strong>Engage in Hobbies:</strong> Make time for activities you enjoy. This helps to de-stress and provides a sense of balance.</li>
+        <li><strong>Gestión del Tiempo:</strong> Crea un horario de estudio realista. Divide las tareas grandes en pasos más pequeños y manejables. Prioriza las tareas según su importancia y plazos.</li>
+        <li><strong>Hábitos de Estudio Efectivos:</strong> Encuentra un método de estudio que te funcione. Esto podría incluir el recuerdo activo, la repetición espaciada o los mapas conceptuales. Asegúrate de tener un entorno de estudio tranquilo y cómodo.</li>
+        <li><strong>Busca Apoyo:</strong> No dudes en hablar con profesores, ayudantes de cátedra, asesores académicos o consejeros si tienes dificultades. Los grupos de estudio también pueden ser beneficiosos.</li>
+        <li><strong>Prioriza el Sueño:</strong> Intenta dormir entre 7 y 9 horas de calidad por noche. La falta de sueño puede empeorar significativamente el estrés y afectar la función cognitiva.</li>
+        <li><strong>Ejercicio Regular:</strong> La actividad física es un gran alivio para el estrés. Incluso una caminata corta o algunos estiramientos pueden marcar la diferencia.</li>
+        <li><strong>Mindfulness y Técnicas de Relajación:</strong> Practica ejercicios de respiración profunda, meditación o yoga para calmar tu mente.</li>
+        <li><strong>Dieta Saludable:</strong> Alimenta tu cuerpo y cerebro con alimentos nutritivos. Evita el exceso de cafeína y los snacks azucarados.</li>
+        <li><strong>Establece Metas Realistas:</strong> Esfuérzate por progresar, no por la perfección. Celebra las pequeñas victorias en el camino.</li>
+        <li><strong>Toma Descansos Regulares:</strong> Los descansos cortos durante las sesiones de estudio pueden mejorar la concentración y reducir la fatiga.</li>
+        <li><strong>Participa en Hobbies:</strong> Dedica tiempo a actividades que disfrutes. Esto ayuda a desestresarse y proporciona una sensación de equilibrio.</li>
       </ol>
-      <p class="mt-6">Remember, experiencing some stress is normal, but chronic stress can be detrimental to your health and academic performance. Implementing these strategies can help you navigate the challenges of student life more effectively. If stress becomes unmanageable, seeking professional help is a sign of strength.</p>
+      <p class="mt-6">Recuerda, experimentar algo de estrés es normal, pero el estrés crónico puede ser perjudicial para tu salud y rendimiento académico. Implementar estas estrategias puede ayudarte a navegar los desafíos de la vida estudiantil de manera más efectiva. Si el estrés se vuelve inmanejable, buscar ayuda profesional es una señal de fortaleza.</p>
     `
   },
   {
     id: 'article2',
-    title: 'Work-Life Balance in the Modern Age',
-    summary: 'Explore techniques to manage professional stress and cultivate a healthy work-life balance in today\'s demanding environment.',
+    title: 'Equilibrio entre Trabajo y Vida Personal en la Era Moderna',
+    summary: 'Explora técnicas para manejar el estrés profesional y cultivar un equilibrio saludable entre trabajo y vida personal en el entorno exigente de hoy.',
     author: 'John Miller',
-    date: 'November 5, 2023',
-    dataAiHint: 'person balancing work home',
-    category: 'Professional Stress',
+    date: '5 de noviembre de 2023',
+    dataAiHint: 'persona equilibrando trabajo hogar',
+    category: 'Estrés Profesional',
     slug: 'work-life-balance',
     content: `
-      <p>Achieving a healthy work-life balance is crucial for overall well-being and preventing professional burnout. The demands of modern work can often blur the lines between professional and personal life. This article explores strategies to create better boundaries and manage your energy effectively.</p>
-      <h3 class="text-xl font-semibold mt-6 mb-3 font-headline">Key Areas for Improvement:</h3>
+      <p>Lograr un equilibrio saludable entre el trabajo y la vida personal es crucial para el bienestar general y para prevenir el agotamiento profesional. Las demandas del trabajo moderno a menudo pueden difuminar las líneas entre la vida profesional y personal. Este artículo explora estrategias para crear mejores límites y gestionar tu energía de manera eficaz.</p>
+      <h3 class="text-xl font-semibold mt-6 mb-3 font-headline">Áreas Clave para Mejorar:</h3>
       <ul class="list-disc list-inside space-y-1 mb-4">
-        <li>Setting clear boundaries between work and personal time.</li>
-        <li>Prioritizing tasks and managing time efficiently.</li>
-        <li>Learning to say "no" to additional commitments when overwhelmed.</li>
-        <li>Incorporating regular breaks and downtime.</li>
-        <li>Engaging in hobbies and activities outside of work.</li>
-        <li>Disconnecting from work-related communications outside of work hours.</li>
+        <li>Establecer límites claros entre el trabajo y el tiempo personal.</li>
+        <li>Priorizar tareas y gestionar el tiempo de manera eficiente.</li>
+        <li>Aprender a decir "no" a compromisos adicionales cuando se está abrumado.</li>
+        <li>Incorporar descansos regulares y tiempo de inactividad.</li>
+        <li>Participar en hobbies y actividades fuera del trabajo.</li>
+        <li>Desconectarse de las comunicaciones relacionadas con el trabajo fuera del horario laboral.</li>
       </ul>
-      <p class="mt-6">Finding what works for you is a personal journey, but actively working towards a better work-life balance can significantly reduce stress and improve job satisfaction.</p>
+      <p class="mt-6">Encontrar lo que funciona para ti es un viaje personal, pero trabajar activamente hacia un mejor equilibrio entre el trabajo y la vida personal puede reducir significativamente el estrés y mejorar la satisfacción laboral.</p>
     `
   },
   {
     id: 'article3',
-    title: 'Navigating Social Media and Mental Well-being',
-    summary: 'Discover how technology and social media can impact stress levels and learn mindful approaches to digital consumption.',
+    title: 'Navegando las Redes Sociales y el Bienestar Mental',
+    summary: 'Descubre cómo la tecnología y las redes sociales pueden impactar los niveles de estrés y aprende enfoques conscientes para el consumo digital.',
     author: 'Aisha Khan',
-    date: 'November 12, 2023',
-    dataAiHint: 'person mindfully using phone nature',
-    category: 'Technological Stress',
+    date: '12 de noviembre de 2023',
+    dataAiHint: 'persona usando telefono conscientemente naturaleza',
+    category: 'Estrés Tecnológico',
     slug: 'social-media-wellbeing',
     content: `
-      <p>Social media and constant digital connectivity can be a double-edged sword. While offering connection and information, they can also contribute to stress, anxiety, and feelings of inadequacy. This article discusses mindful approaches to using technology.</p>
-      <h3 class="text-xl font-semibold mt-6 mb-3 font-headline">Strategies for Mindful Tech Use:</h3>
+      <p>Las redes sociales y la conectividad digital constante pueden ser un arma de doble filo. Si bien ofrecen conexión e información, también pueden contribuir al estrés, la ansiedad y los sentimientos de insuficiencia. Este artículo analiza enfoques conscientes para el uso de la tecnología.</p>
+      <h3 class="text-xl font-semibold mt-6 mb-3 font-headline">Estrategias para un Uso Consciente de la Tecnología:</h3>
       <ul class="list-disc list-inside space-y-1 mb-4">
-        <li>Setting time limits for social media and app usage.</li>
-        <li>Curating your feed to include positive and uplifting content.</li>
-        <li>Taking regular digital detox breaks.</li>
-        <li>Being aware of comparison traps and their impact on self-esteem.</li>
-        <li>Focusing on real-world interactions and hobbies.</li>
+        <li>Establecer límites de tiempo para el uso de redes sociales y aplicaciones.</li>
+        <li>Curar tu feed para incluir contenido positivo y edificante.</li>
+        <li>Tomar descansos regulares de desintoxicación digital.</li>
+        <li>Ser consciente de las trampas de comparación y su impacto en la autoestima.</li>
+        <li>Centrarse en interacciones y hobbies del mundo real.</li>
       </ul>
-      <p class="mt-6">By becoming more intentional with our technology use, we can harness its benefits while mitigating its potential negative impacts on our mental well-being.</p>
+      <p class="mt-6">Al volvernos más intencionales con nuestro uso de la tecnología, podemos aprovechar sus beneficios mientras mitigamos sus posibles impactos negativos en nuestro bienestar mental.</p>
     `
   },
   {
     id: 'article4',
-    title: 'Mindfulness Meditation: A Beginner\'s Guide',
-    summary: 'An introduction to mindfulness meditation practices that can help reduce stress and improve overall emotional regulation.',
-    author: 'Serene Pathways Team',
-    date: 'November 18, 2023',
-    dataAiHint: 'calm person meditating outdoors sun',
-    category: 'Techniques',
+    title: 'Meditación Mindfulness: Guía para Principiantes',
+    summary: 'Una introducción a las prácticas de meditación mindfulness que pueden ayudar a reducir el estrés y mejorar la regulación emocional general.',
+    author: 'Equipo Serenamente',
+    date: '18 de noviembre de 2023',
+    dataAiHint: 'persona calmada meditando airelibre sol',
+    category: 'Técnicas',
     slug: 'mindfulness-meditation-guide',
     content: `
-      <p>Mindfulness meditation is a practice that involves paying attention to the present moment without judgment. It has been shown to reduce stress, improve focus, and enhance emotional regulation. This guide provides a simple introduction to get you started.</p>
-      <h3 class="text-xl font-semibold mt-6 mb-3 font-headline">Getting Started with Mindfulness:</h3>
+      <p>La meditación mindfulness es una práctica que implica prestar atención al momento presente sin juzgar. Se ha demostrado que reduce el estrés, mejora la concentración y potencia la regulación emocional. Esta guía proporciona una introducción sencilla para que comiences.</p>
+      <h3 class="text-xl font-semibold mt-6 mb-3 font-headline">Comenzando con Mindfulness:</h3>
       <ol class="list-decimal list-inside space-y-2">
-        <li><strong>Find a Quiet Space:</strong> Choose a comfortable place where you won't be disturbed.</li>
-        <li><strong>Comfortable Posture:</strong> Sit or lie down in a comfortable position.</li>
-        <li><strong>Focus on Your Breath:</strong> Pay attention to the sensation of your breath entering and leaving your body.</li>
-        <li><strong>Acknowledge Thoughts:</strong> When your mind wanders (and it will), gently acknowledge the thought and return your focus to your breath.</li>
-        <li><strong>Start Small:</strong> Begin with short sessions of 5-10 minutes and gradually increase the duration.</li>
+        <li><strong>Encuentra un Espacio Tranquilo:</strong> Elige un lugar cómodo donde no te molesten.</li>
+        <li><strong>Postura Cómoda:</strong> Siéntate o acuéstate en una posición cómoda.</li>
+        <li><strong>Concéntrate en tu Respiración:</strong> Presta atención a la sensación de tu respiración entrando y saliendo de tu cuerpo.</li>
+        <li><strong>Reconoce los Pensamientos:</strong> Cuando tu mente divague (y lo hará), reconoce suavemente el pensamiento y vuelve tu atención a tu respiración.</li>
+        <li><strong>Empieza Poco a Poco:</strong> Comienza con sesiones cortas de 5-10 minutos y aumenta gradualmente la duración.</li>
       </ol>
-      <p class="mt-6">Consistency is key. Even a few minutes of mindfulness each day can make a difference.</p>
+      <p class="mt-6">La constancia es clave. Incluso unos pocos minutos de mindfulness cada día pueden marcar la diferencia.</p>
     `
   },
 ];
 
-// This function simulates fetching full article data including its image URL
 async function getArticleData(slug: string): Promise<ArticleData | null> {
   const articleBase = articlesDb.find(art => art.slug === slug);
   if (!articleBase) {
@@ -150,12 +149,12 @@ export default async function ArticlePage({ params }: { params: { slug: string }
     return (
       <PageWrapper>
         <div className="text-center py-20">
-          <h1 className="text-4xl font-bold mb-4">Article Not Found</h1>
+          <h1 className="text-4xl font-bold mb-4">Artículo No Encontrado</h1>
           <p className="text-lg text-muted-foreground mb-8">
-            Sorry, we couldn't find the article you were looking for.
+            Lo sentimos, no pudimos encontrar el artículo que estabas buscando.
           </p>
           <Button asChild>
-            <Link href="/articles">Back to Articles</Link>
+            <Link href="/articles">Volver a Artículos</Link>
           </Button>
         </div>
       </PageWrapper>
@@ -168,7 +167,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         <div className="mb-8">
           <Button variant="outline" asChild>
             <Link href="/articles">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Articles
+              <ArrowLeft className="mr-2 h-4 w-4" /> Volver a Artículos
             </Link>
           </Button>
         </div>
@@ -181,6 +180,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
                 alt={article.title}
                 layout="fill"
                 objectFit="cover"
+                data-ai-hint={article.dataAiHint}
                 priority 
               />
             </div>
@@ -212,16 +212,16 @@ export default async function ArticlePage({ params }: { params: { slug: string }
         </Card>
 
         <div className="mt-12 text-center">
-            <h3 className="text-2xl font-semibold mb-4">Need More Support?</h3>
+            <h3 className="text-2xl font-semibold mb-4">¿Necesitas Más Apoyo?</h3>
             <p className="text-muted-foreground mb-6">
-                Our AI Chatbot can provide personalized advice, or you can explore professional resources.
+                Nuestro Chatbot IA puede proporcionar consejos personalizados, o puedes explorar recursos profesionales.
             </p>
             <div className="space-x-4">
                 <Button asChild size="lg">
-                    <Link href="/chatbot">Chat with AI</Link>
+                    <Link href="/chatbot">Chatear con IA</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                    <Link href="/resources">Find Professionals</Link>
+                    <Link href="/resources">Encontrar Profesionales</Link>
                 </Button>
             </div>
         </div>
@@ -237,19 +237,14 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  // Fetch minimal data needed for metadata, or reuse if already fetched efficiently
   const articleDataForMeta = articlesDb.find(art => art.slug === params.slug);
   if (!articleDataForMeta) {
     return {
-      title: 'Article Not Found',
+      title: 'Artículo No Encontrado',
     }
   }
   return {
-    title: `${articleDataForMeta.title} | Serene Pathways`,
+    title: `${articleDataForMeta.title} | Serenamente`,
     description: articleDataForMeta.summary,
-    // openGraph: {
-    //   images: [articleDataForMeta.imageUrl || ''], // Add fetched image URL here if needed for social sharing
-    // },
   }
 }
-

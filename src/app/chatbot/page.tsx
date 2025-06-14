@@ -11,9 +11,9 @@ export default function ChatbotPage() {
           <div className="flex justify-center items-center mb-4">
             <MessageSquareHeart className="w-12 h-12 text-primary" />
           </div>
-          <CardTitle className="text-3xl font-bold">Emotional Support Chatbot</CardTitle>
+          <CardTitle className="text-3xl font-bold">Chatbot de Apoyo Emocional</CardTitle>
           <CardDescription className="text-lg text-muted-foreground">
-            Your friendly AI companion for stress relief and emotional well-being.
+            Tu compañero IA amigable para el alivio del estrés y el bienestar emocional.
           </CardDescription>
         </CardHeader>
         <CardContent>

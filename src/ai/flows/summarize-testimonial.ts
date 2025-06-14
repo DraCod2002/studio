@@ -1,12 +1,12 @@
-// Summarize a testimonial
+
 'use server';
 
 /**
- * @fileOverview A testimonial summarization AI agent.
+ * @fileOverview Un agente de IA para resumir testimonios.
  *
- * - summarizeTestimonial - A function that handles the testimonial summarization process.
- * - SummarizeTestimonialInput - The input type for the summarizeTestimonial function.
- * - SummarizeTestimonialOutput - The return type for the summarizeTestimonial function.
+ * - summarizeTestimonial - Una función que maneja el proceso de resumen de testimonios.
+ * - SummarizeTestimonialInput - El tipo de entrada para la función summarizeTestimonial.
+ * - SummarizeTestimonialOutput - El tipo de retorno para la función summarizeTestimonial.
  */
 
 import {ai} from '@/ai/genkit';
@@ -15,12 +15,12 @@ import {z} from 'genkit';
 const SummarizeTestimonialInputSchema = z.object({
   testimonial: z
     .string()
-    .describe('The testimonial to summarize.'),
+    .describe('El testimonio a resumir.'),
 });
 export type SummarizeTestimonialInput = z.infer<typeof SummarizeTestimonialInputSchema>;
 
 const SummarizeTestimonialOutputSchema = z.object({
-  summary: z.string().describe('The summary of the testimonial.'),
+  summary: z.string().describe('El resumen del testimonio.'),
 });
 export type SummarizeTestimonialOutput = z.infer<typeof SummarizeTestimonialOutputSchema>;
 
@@ -32,7 +32,7 @@ const prompt = ai.definePrompt({
   name: 'summarizeTestimonialPrompt',
   input: {schema: SummarizeTestimonialInputSchema},
   output: {schema: SummarizeTestimonialOutputSchema},
-  prompt: `Summarize the following testimonial in a concise and informative way:\n\n{{{testimonial}}}`,
+  prompt: `Resume el siguiente testimonio de forma concisa e informativa:\n\n{{{testimonial}}}`,
 });
 
 const summarizeTestimonialFlow = ai.defineFlow(
