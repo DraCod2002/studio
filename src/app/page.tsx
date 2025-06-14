@@ -118,7 +118,7 @@ export default async function HomePage() {
             <p className="text-lg text-muted-foreground mb-8">
               Nuestras herramientas y recursos están diseñados para ayudarte a navegar los desafíos de la vida con mayor facilidad y resiliencia. Descubre estrategias y apoyo personalizados.
             </p>
-            <div className="space-y-4 md:space-y-0 md:space-x-4">
+            <div className="space-y-6 md:space-y-0 md:space-x-4">
               <Button asChild size="lg" className="w-full md:w-auto shadow-md hover:shadow-lg transition-shadow">
                 <Link href="/articles">Leer Artículos</Link>
               </Button>
