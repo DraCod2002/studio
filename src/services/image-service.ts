@@ -6,34 +6,35 @@
 // PIXABAY_API_KEY=TU_CLAVE_API_REAL_DE_PIXABAY
 // La clave que proporcionaste (41934519-a36f6965d8021c8eb21f6fba8) se usa como respaldo aquí.
 
-// Marcador de posición predeterminado si no se encuentra ninguna imagen o hay un problema con la clave API
+const PIXABAY_API_URL = 'https://pixabay.com/api/';
 const DEFAULT_PLACEHOLDER_BASE = 'https://placehold.co/600x400.png';
+const FALLBACK_PIXABAY_API_KEY = '41934519-a36f6965d8021c8eb21f6fba8'; // Clave de ejemplo de la documentación
 
-// Definir la clave de respaldo una vez
-const FALLBACK_PIXABAY_API_KEY = '41934519-a36f6965d8021c8eb21f6fba8';
-
-// Determinar la clave API a usar y registrar advertencias/información
-let determinedApiKey = process.env.PIXABAY_API_KEY;
+let initialApiKeySource: string;
+let apiKeyToUse = process.env.PIXABAY_API_KEY;
 
 if (process.env.NODE_ENV === 'production') {
-  if (!determinedApiKey) {
+  if (!apiKeyToUse) {
+    initialApiKeySource = 'fallback (PIXABAY_API_KEY not set in Netlify)';
+    apiKeyToUse = FALLBACK_PIXABAY_API_KEY;
     console.warn(
-      '[Pixabay Service] ADVERTENCIA IMPORTANTE: La variable de entorno PIXABAY_API_KEY no está configurada en su entorno de producción (Netlify). ' +
-      'Se utilizará una clave de API de respaldo. Esto podría llevar a imágenes de marcador de posición o fallos ' +
-      'si la clave de respaldo es inválida o alcanza límites de uso. Para asegurar el correcto funcionamiento, ' +
-      'por favor, configure PIXABAY_API_KEY en la sección "Environment variables" de la configuración de su sitio en Netlify y luego redespliegue su sitio.'
+      `[Pixabay Service] ADVERTENCIA IMPORTANTE: La variable de entorno PIXABAY_API_KEY no está configurada en su entorno de producción (Netlify). ` +
+      `Se utilizará una clave API de respaldo (${FALLBACK_PIXABAY_API_KEY.substring(0,8)}...). Esto podría llevar a imágenes de marcador de posición o fallos. ` +
+      `Por favor, configure PIXABAY_API_KEY en Netlify y redespliegue.`
     );
-    determinedApiKey = FALLBACK_PIXABAY_API_KEY;
   } else {
-    console.log('[Pixabay Service] PIXABAY_API_KEY se está utilizando desde las variables de entorno de producción (Netlify).');
+    initialApiKeySource = 'Netlify environment variable';
+    console.log(`[Pixabay Service] PIXABAY_API_KEY se está utilizando desde las variables de entorno de producción (Netlify): ${apiKeyToUse.substring(0,8)}...`);
   }
 } else {
   // Entorno de desarrollo/local
-  if (!determinedApiKey) {
-    console.log('[Pixabay Service] PIXABAY_API_KEY no encontrada en .env.local. Usando clave de respaldo para desarrollo. Considere añadirla a su archivo .env.local para pruebas locales.');
-    determinedApiKey = FALLBACK_PIXABAY_API_KEY;
+  if (!apiKeyToUse) {
+    initialApiKeySource = 'fallback (.env.local missing PIXABAY_API_KEY)';
+    apiKeyToUse = FALLBACK_PIXABAY_API_KEY;
+    console.log(`[Pixabay Service] PIXABAY_API_KEY no encontrada en .env.local. Usando clave de respaldo (${FALLBACK_PIXABAY_API_KEY.substring(0,8)}...) para desarrollo.`);
   } else {
-     console.log('[Pixabay Service] Usando PIXABAY_API_KEY desde el archivo .env.local para desarrollo.');
+     initialApiKeySource = '.env.local file';
+     console.log(`[Pixabay Service] Usando PIXABAY_API_KEY desde el archivo .env.local: ${apiKeyToUse.substring(0,8)}...`);
   }
 }
 
@@ -42,7 +43,7 @@ interface PixabayHit {
   id: number;
   largeImageURL: string;
   webformatURL: string;
-  // Agrega otros campos si es necesario, como etiquetas, usuario, etc.
+  previewURL: string;
 }
 
 interface PixabayResponse {
@@ -54,48 +55,52 @@ interface PixabayResponse {
 export async function fetchPixabayImage(
   query: string,
   orientation: 'horizontal' | 'vertical' | 'all' = 'all',
-  fallbackPlaceholderSeed?: string // Para hacer que los marcadores de posición sean únicos si es necesario
+  fallbackPlaceholderSeed?: string
 ): Promise<string> {
-  const placeholderQuery = fallbackPlaceholderSeed || query || "imagen";
-  const defaultPlaceholder = `${DEFAULT_PLACEHOLDER_BASE}?text=${encodeURIComponent(placeholderQuery)}`;
+  const placeholderQueryText = fallbackPlaceholderSeed || query || "imagen";
+  const defaultPlaceholder = `${DEFAULT_PLACEHOLDER_BASE}?text=${encodeURIComponent(placeholderQueryText)}`;
 
-  // determinedApiKey ya está establecida con la lógica correcta y los logs al inicio del archivo.
-  if (!determinedApiKey) {
-     // Este caso es muy improbable dado que siempre hay un fallback.
-     console.error('[Pixabay Fetch] Error Crítico: No hay clave API de Pixabay disponible internamente. Volviendo a marcador de posición.');
-     return defaultPlaceholder;
+  // apiKeyToUse ya está determinada globalmente en este módulo
+  if (!apiKeyToUse) {
+     console.error('[Pixabay Fetch] Error Crítico Interno: No hay clave API de Pixabay disponible. Volviendo a marcador de posición.');
+     return `${DEFAULT_PLACEHOLDER_BASE}?text=Error+Interno+Clave`;
   }
 
+  console.log(`[Pixabay Fetch] Intentando obtener imagen para "${query}". Usando API Key (fuente: ${initialApiKeySource}): ${apiKeyToUse.substring(0,8)}...`);
+
   const params = new URLSearchParams({
-    key: determinedApiKey,
+    key: apiKeyToUse,
     q: query,
     image_type: 'photo',
     safesearch: 'true',
-    per_page: '5', // Obtener algunas para tener la oportunidad de elegir una
+    per_page: '3', // Obtener algunas para tener la oportunidad de elegir una
     orientation: orientation,
-    lang: 'es', // Solicitar resultados en español si es posible
+    lang: 'es',
   });
 
+  const fetchUrl = `${PIXABAY_API_URL}?${params.toString()}`;
+  console.log(`[Pixabay Fetch] URL de solicitud: ${fetchUrl}`);
+
   try {
-    const response = await fetch(`${PIXABAY_API_URL}?${params.toString()}`, { next: { revalidate: 3600 } }); // Cache por 1 hora
+    const response = await fetch(fetchUrl, { next: { revalidate: 3600 } }); // Cache por 1 hora
+
     if (!response.ok) {
       const errorText = await response.text();
-      console.error(`La solicitud a la API de Pixabay falló con el estado ${response.status}: ${errorText}. Consulta: ${query}. Clave usada (parcial): ${determinedApiKey.substring(0, 5)}...`);
-      return `${DEFAULT_PLACEHOLDER_BASE}?text=Error+API`;
+      console.error(`[Pixabay Fetch] La solicitud a la API de Pixabay falló con el estado ${response.status}: ${errorText}. Consulta: "${query}". URL: ${fetchUrl}`);
+      return `${DEFAULT_PLACEHOLDER_BASE}?text=Error+API(${response.status})`;
     }
 
     const data: PixabayResponse = await response.json();
 
     if (data.hits && data.hits.length > 0) {
-      // Por simplicidad, toma la primera imagen. Se podría agregar lógica para elegir según la relación de aspecto u otros criterios.
+      console.log(`[Pixabay Fetch] Imagen encontrada para "${query}": ${data.hits[0].largeImageURL}`);
       return data.hits[0].largeImageURL || data.hits[0].webformatURL;
     } else {
-      console.log(`No se encontraron imágenes en Pixabay para la consulta: "${query}"`);
-      return `${DEFAULT_PLACEHOLDER_BASE}?text=${encodeURIComponent("Sin imagen: " + query.substring(0,20))}`;
+      console.warn(`[Pixabay Fetch] No se encontraron imágenes en Pixabay para la consulta: "${query}". Total Hits: ${data.totalHits}. URL: ${fetchUrl}`);
+      return `${DEFAULT_PLACEHOLDER_BASE}?text=Sin+Imagen(${encodeURIComponent(query.substring(0,15))})`;
     }
   } catch (error) {
-    console.error(`Error al obtener la imagen de Pixabay para la consulta "${query}":`, error);
-    return `${DEFAULT_PLACEHOLDER_BASE}?text=Error+Obtencion`;
+    console.error(`[Pixabay Fetch] Error al obtener la imagen de Pixabay para la consulta "${query}". Error:`, error);
+    return `${DEFAULT_PLACEHOLDER_BASE}?text=Error+Red`;
   }
 }
-
