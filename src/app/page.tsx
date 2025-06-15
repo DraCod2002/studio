@@ -53,8 +53,8 @@ const stressCategories = [
 ];
 
 export default async function HomePage() {
-  const heroCircularImageHint = "chica meditando calma";
-  const heroCircularImageUrl = await fetchPixabayImage(heroCircularImageHint, 'all', 'hero-circular-chica-meditando');
+  const heroCircularImageHint = "chica meditando frente calma";
+  const heroCircularImageUrl = await fetchPixabayImage(heroCircularImageHint, 'all', 'hero-circular-chica-meditando-frente');
 
   const heroBackgroundImageHint = "fondo abstracto sereno rosa pastel";
   const heroBackgroundImageUrl = await fetchPixabayImage(heroBackgroundImageHint, 'horizontal', 'hero-bg-img');
@@ -83,7 +83,7 @@ export default async function HomePage() {
           <div className="relative w-48 h-48 md:w-60 md:h-60 mx-auto mb-8">
             <Image 
               src={heroCircularImageUrl} 
-              alt="Chica calmada meditando en la naturaleza" 
+              alt="Chica meditando de frente con calma" 
               layout="fill"
               objectFit="cover"
               className="rounded-full shadow-xl"
