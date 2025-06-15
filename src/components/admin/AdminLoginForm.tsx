@@ -22,6 +22,7 @@ export default function AdminLoginForm() {
     e.preventDefault();
     setError('');
 
+    // Estas son las credenciales correctas
     if (username === 'admin' && password === 'admin2025') {
       setAdminLoggedIn(true);
       toast({
@@ -56,7 +57,7 @@ export default function AdminLoginForm() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              placeholder="admin"
+              placeholder="Tu nombre de usuario"
             />
           </div>
           <div className="space-y-2">
@@ -67,7 +68,7 @@ export default function AdminLoginForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              placeholder="admin2025"
+              placeholder="Tu contraseña"
             />
           </div>
           {error && (
