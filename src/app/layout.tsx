@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   title: 'Xstrees',
   description: 'Tu guía para comprender y manejar el estrés.',
   icons: {
-    icon: '/favicon.ico', 
+    icon: '/favicon.ico',
   },
 };
 

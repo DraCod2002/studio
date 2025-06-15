@@ -14,8 +14,8 @@ type CategoryDetails = {
     description: string;
     longDescription: string;
     icon: React.ElementType;
-    dataAiHint: string; 
-    defaultImageUrl?: string; 
+    dataAiHint: string;
+    defaultImageUrl?: string;
   };
 };
 
@@ -80,10 +80,10 @@ async function getCategoryPageData(slug: string) {
   };
 
   const imageUrl = await fetchPixabayImage(details.dataAiHint, 'horizontal', slug);
-  
+
   return {
     ...details,
-    imageUrl: imageUrl, 
+    imageUrl: imageUrl,
   };
 }
 
@@ -155,9 +155,9 @@ export default async function StressCategoryPage({ params }: CategoryPageProps) 
 }
 
 export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-  const categoryData = await getCategoryPageData(params.category); 
+  const categoryData = await getCategoryPageData(params.category);
   return {
-    title: `${categoryData.title} | Serenamente`,
+    title: `${categoryData.title} | Xstrees`,
     description: categoryData.description,
   };
 }
