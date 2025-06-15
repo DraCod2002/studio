@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { ThemeProvider } from '@/components/theme-provider';
+import PageViewTracker from '@/components/analytics/PageViewTracker';
 
 export const metadata: Metadata = {
   title: 'Xstrees',
@@ -33,6 +34,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <PageViewTracker />
           <Header />
           <main className="flex-grow">
             {children}

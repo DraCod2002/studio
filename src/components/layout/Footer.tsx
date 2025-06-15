@@ -14,9 +14,11 @@ export default function Footer() {
           <Link href="/terms-of-service" className="hover:text-primary transition-colors">
             Términos de Servicio
           </Link>
+          <Link href="/admin/login" className="hover:text-primary transition-colors">
+            Admin
+          </Link>
         </div>
       </div>
     </footer>
   );
 }
-
